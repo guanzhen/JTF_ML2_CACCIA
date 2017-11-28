@@ -1,0 +1,503 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/ html;charset=utf-8" />
+
+    <link rel="stylesheet" type="text/css" href="Style.css">		
+    <!-- <link   rel="stylesheet" type="text/css" href="../../Caccia.css"> -->
+    <!-- Dhtmlx Common -->
+	  <script src="../../../codebase/dhtmlxcommon.js"></script>
+	  <script src="../../../codebase/dhtmlxcontainer.js"></script>
+
+	  <!-- Dhtmlx TabBar -->
+	  <link rel="stylesheet" type="text/css" href="../../../codebase/tabbar/dhtmlxtabbar.css">
+	  <script src="../../../codebase/tabbar/dhtmlxtabbar.js"></script>
+
+	  <!-- Dhtmlx Grid -->
+	  <link rel="stylesheet" type="text/css" href="../../../codebase/grid/skins/dhtmlxgrid_dhx_skyblue.css">
+	  <link rel="stylesheet" type="text/css" href="../../../codebase/grid/dhtmlxgrid.css">
+	  <script src="../../../codebase/grid/dhtmlxgrid.js"></script>    
+  <script src="../../../codebase/grid/ext/dhtmlxgrid_srnd.js" type="text/javascript"></script>
+	  <script src="../../../codebase/grid/dhtmlxgridcell.js"></script>
+	  <script src="../../../codebase/grid/ext/dhtmlxgrid_data.js"></script>
+
+	  <!-- Dhtmlx Windows -->
+	  <link rel="stylesheet" type="text/css" href="../../../codebase/windows/skins/dhtmlxwindows_dhx_skyblue.css">
+	  <link rel="stylesheet" type="text/css" href="../../../codebase/windows/dhtmlxwindows.css">
+	  <script src="../../../codebase/windows/dhtmlxwindows.js"></script>
+
+		<script src="onload.js" ></script>
+    
+    <style>
+    </style>
+		<title>Telsa Control</title>
+	</head>
+	<body id="body_main" >
+    <div id="Layer_TabStrip"></div>
+    <!-- --------------------------------------------------------------------->
+    <!-- Frame Command Control -->
+    <!-- --------------------------------------------------------------------->
+    <div id = "Frame_Commands" >
+      <div id = "FrameInfo" class = "GrpFrame">
+        <div id="FrameAssignID">
+          <table>
+          <td><span style = "color = white;font-size = 10pt;font-family=arial;margin=0px;">0x</span></td>
+          <td><input id = "inputCANID" ></input></td>
+          <td><button id = "btnAssignCANID" class = "btn_command_info">Assign CANID</button></td>
+          <td><button id = "btnGetApp" class = "btn_command_info">Read Info</button></td>
+          <td><button id = "btnReset" class = "btn_command_info">Reset</button></td>
+          <td><button id="btnclrusrerr" class = "btn_command_info">Clear Err</button></td>
+
+          </table>
+        </div>
+        
+        <div id = "FrameFirmwareVersion" class = "GrpInnerFrame" style = "width:33%">
+          <table class = "FontCommon">
+          <tr><td>Bios Ver</td><td><input id = "textBiosVersion" class ="InputasDisplay" readonly ></input></td></tr>
+          <tr><td>App Ver</td><td><input id = "textAppVersion" class ="InputasDisplay" readonly></input></td></tr>
+          </table>
+        </div>
+
+        <div id = "FrameCassetteConfig" class = "GrpInnerFrame" style = "width:33%">
+          <table class = "FontCommon">
+          <tr><td style = "width : 70px">Cas Top</td><td><input id="inputCasInfoTop" class ="InputasDisplay" readonly></input></td></tr>
+          <tr><td>Cas Bottom</td><td><input id="inputCasInfoBottom" class ="InputasDisplay" readonly></input></td></tr>
+          </table>
+        </div>
+          
+		<div id = "FrameFeederID" class = "GrpInnerFrame" style = "width:33%">
+		  <span class = "FontCommon">Feeder ID  </span><input id="inputFeederID" class ="InputasDisplay" readonly></input>
+		</div>
+       
+        <div id="FrameInfoButtons">
+          <table>
+            <tr>
+
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div id = "Frame_CommandGeneral" class = "GrpFrame ">
+        <h1>Commands</h1>
+        <table>
+        <tr>
+        <td>   </td>
+        <td><button id = "btnRefRun" >Reference Run</button></td>         
+        </tr>
+        <tr>
+          <td><select class="select_command" id = "optSelectTray" ></select></td>
+          <td><button id = "btnCmdPrepareTray"  >Prepare Tray</button></td>
+          <td><button id = "btnCmdReturnTray"  >Unload Tray</button></td>
+          <td>X-Acc<input id="input_xacc"></input></td>
+          <td>Z-Acc<input id="input_zacc"></input></td>
+        </tr>
+        <tr>
+          <td>
+            <select class="select_command" id = "optRefillCassette" >
+              <option value = "0x02">Top</option>
+              <option value = "0x01">Bottom</option>
+            </select>
+          </td>
+          <td><button id = "btnRefillStart" >Refill Start</button></td>
+          <td><button id = "btnRefillStop" >Refill Stop</button></td>
+        </tr>
+        <tr>
+          <td><select class="select_command" id = "optMoveLevel"></select></td>
+          <td><button tooltip = "Moves to cassette level" id = "btnMoveLevel" >Move to Level</button></td>
+          <td><button tooltip = "Moves to Transport Position" id = "btnMoveTransport" >Transport Pos</button></td>
+          
+        </tr>
+        <tr>
+          <td></td>
+          <td><button id = "btnDoorOpen" >Door Unlock</button></td>
+          <td><button id = "btnDoorClose" >Door Lock</button></td>
+          <td><img id="DoorSwitchLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Door Closed</b></img></td>        
+          <td><img id="DoorLockLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Door Locked</b></img></td>
+        </tr>
+      
+        </table>
+      </div>
+    </div>
+    <!-- --------------------------------------------------------------------->
+    <!-- Frame Axis Control -->
+    <!-- --------------------------------------------------------------------->
+    <div id = "Frame_AxisControl">
+      <div id= "FrameAxisInfomation" class= "GrpFrame">
+        <div id= "FrameAxisRefInfo" class= "GrpInnerFrame">
+          <h1>Reference Information </h1>
+          <div id="InnerFrame_RefDisplay">
+          <table>
+            <tr>
+              <td>OverAll</td>
+              <td><input id="OverAllRefRun" class="InputasDisplay" readonly></td>          
+            </tr>
+            <tr>
+              <td>Lift Axis</td>
+              <td><input id="LiftMotorRefRun" class="InputasDisplay" readonly></td>          
+            </tr>
+            <tr>
+              <td>Kicker Axis</td>
+              <td><input id="KickerMotorRefRun" class="InputasDisplay" readonly></td>    
+            </tr>
+            <tr>
+              <td>Conveyor Axis</td>
+              <td><input id="ConveyorMotorRefRun" class="InputasDisplay" readonly></td>    
+            </tr>
+            <tr>
+              <td>Pusher Axis</td>
+              <td><input id="PusherMotorRefRun" class="InputasDisplay" readonly></td>    
+            </tr>
+            <tr>
+              <td>Clamper Axis</td>
+              <td><input id="ClamperMotorRefRun" class="InputasDisplay" readonly></td>    
+            </tr>
+            <tr>
+              <td><button class="btn_axis_control" id = "btnRefRun" >Reference Run</button></td>         
+              <td><button class="btn_axis_control" style = "width:100%;" id="btnGetRefInfo" >Get Ref Info</button></td>
+            </tr>    
+          </table>
+          </div>
+        </div>
+        
+        <div id="FrameAxisMiscControl" class = "GrpInnerFrame">            
+          <div id = "FrameTrayInfo">
+            <table>
+              <tr>
+                <td><h1> Conveyor Tray </h1></td>
+                <td><input id="inputTrayConveyor" class="InputasDisplay" readonly></td>
+              </tr>
+            </table>     
+          </div>
+          <hr>  
+          <div id ="FrameAxisBrakeControl">    
+            <h1>Lift Brake</h1>
+            <table>
+              <tr>
+              <td><button class="btn_axis_control" id="btn_elvtbrakeon"> Brake</button></td>
+              <td><button class="btn_axis_control" id="btn_elvtbrakeoff"> Release</button></td>
+              </tr>
+            </table>
+          </div>
+          <hr>
+          <div id ="FrameAxisDoorControl">    
+            <h1>Door Controls</h1>
+            <table>
+              <tr>
+              <td><button class="btn_axis_control" id = "btnDoorOpen" >Unlock</button></td>
+              <td><button class="btn_axis_control" id = "btnDoorClose" >Lock+Hold</button></td>
+              </tr>
+            </table>
+          </div>
+        </div>    
+      </div>
+      
+      <div id = "FrameAxisElevOffsetCtrl" class = "GrpFrame">
+        <h1>Lift Offset Control</h1>
+        <span>1. Move Lift to position to set.</span><br>
+        <span>2. Make adjustments using '+' and '-' buttons.</span><br>
+        <span>3. Click on 'Set New Pos' to save the position.</span><br>
+
+        <div style = "float:left;margin-top:10px;margin-left:5px" >
+          <table>
+            <tr class = "seperator">
+              <td><button class="btn_axis_control" id = "btnPositive"   style = "width=75px;">+</button>
+              <td>Tray Index Position</td>
+              <td><button class="btn_axis_control" id = "btnMovetoMidIndexPos"  style="margin:0px 5px">Move to Pos</button></td>
+              <td><button class="btn_axis_control" id = "btnSetMidIndexPos"  style="margin:0px 5px">Set New Pos</button></td>
+              <td><button class="btn_axis_control" id = "btnSetMidIndexPosDefault"  style="margin:0px 5px">Set Default</button></td>
+            </tr>
+            <tr>
+              <td>
+                <select class = "select_axiscontrol" id = "SelPosControlStep" style = "width=75px;">
+                <option value = "45">0.045mm</option>
+                <option value = "100">0.1mm</option>
+                <option value = "500">0.5mm</option>
+                <option value = "1000">1mm</option>
+                <option value = "5000">5mm</option>
+                <option value = "10000">10mm</option>
+                </select>
+              </td>
+             <td colspan = "4"><hr /></td>
+            </tr>
+            <tr>
+              <td><button class="btn_axis_control" id = "btnNegative"   style = "width=75px;">-</button>      
+              <td>Door Position</td>
+              <td><button class="btn_axis_control" id = "btnMovetoDoorPos"  style="margin:0px 5px">Move to Pos</button></td>
+              <td><button class="btn_axis_control" id = "btnSetDoorPos"  style="margin:0px 5px">Set New Pos</button></td>
+              <td><button class="btn_axis_control" id = "btnSetDoorPosDefault"  style="margin:0px 5px">Set Default</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      
+      <div id = "FrameAxisIndividual" class ="GrpFrame">
+        <div id = "frame_indaxis_move">
+          <h1>Individual Axis Functions</h1>
+          <select class="select_axiscontrol" id="Command_AxisMoveList" >
+            <option value="2">Conveyor</option>
+            <option value="3">Kicker</option>
+            <option value="4">Pusher</option>
+            <option value="5">Clamper</option>
+          </select>
+          <select class="select_axiscontrol" id="Command_AxisMoveLevel" > </select>
+          <button class="btn_axis_control"  id="btnMoveAxis" style="margin-left:10px;width:80px">Move</button>          
+        </div>
+        <hr>
+        <div id="frame_ind_refrun">
+          <h1>Individual Axis Reference Run</h1>
+          <select class="select_axiscontrol" id="Command_AxisRefRunList" >
+            <option value="1">Lift</option>
+            <option value="2">Conveyor</option>
+            <option value="3">Kicker</option>
+            <option value="4">Pusher</option>
+            <option value="5">Clamper</option>
+          </select>
+          
+          <button class="btn_axis_control"  id="btnIndividualRefRun" style="margin-left:10px;width:80px">Reference</button>
+        </div>  
+      </div>
+
+    </div>
+    
+    <!-- --------------------------------------------------------------------->
+    <!-- Frame IO Control -->
+    <!-- --------------------------------------------------------------------->
+    <div id = "Frame_IOs">
+      <div id = "Frame_Sensors" class="GrpFrame">
+        <div id = "InnerFrame_Sensors">
+          <table id="Sensors" class = "tablebckgnd">
+            <tr><td><h1>Sensors</h1></td></tr>      
+            <tr><td><img id="DoorSwitchLed2" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Door Closed</b></img></td></tr>
+            <tr><td><img id="SafetyLoopLED" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Safety Loop Closed</b></img></td></tr>
+
+            <tr><td><img id="MtrPowerOff" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Motor Power On</b></img></td></tr>
+            <tr><td><img id="DoorLockLed2" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Door Lock On</b></img></td></tr>
+          </table> 
+          <br>  
+          <table>  
+            <tr><td><img id="KickerHmLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Kicker Home</b></img></td></tr>
+            <tr><td><img id="ClamperHmLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Clamper Home Sensor</b></img></td>      </tr>
+            <tr><td><img id="PusherHmLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Pusher Home Sensor</b></img></td></tr>
+            <tr><td><img id="TrayLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Tray Present Sensor</b></img></td></tr>
+            <tr><td><img id="BottomLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Lift Bottom Limit Sensor</b></img></td></tr>
+            <tr><td><img id="LiftBrakeLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Lift Axis Brake On</b></img></td></tr>
+          </table>
+          <br>
+          <table>  
+            <tr><td><img id="GapLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Gap Sensor</b></img></td></tr>
+            <tr><td><img id="RwSdLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Reverse SlowDown Sensor</b></img></td></tr>
+            <tr><td><img id="FwSdLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Foward SlowDown Sensor</b></img><td></tr>
+          </table>
+        </div>
+        <div id= "InnerFrame_IOButtons">
+          <button id="btnReadIO"  style = "width:150px;height:30px">Start IO Polling</button>
+          <button id = "btnRefRun"  style = "width:150px;height:30px;">Reference Run</button>
+          <br>
+          <button id = "btnDoorOpen"  style = "width:150px;height:30px">Door Unlock</button>
+          <button id = "btnDoorClose"  style = "width:150px;height:30px;">Door Lock</button>
+        </div>                
+      </div>
+      <!-- HIdden frame to store unused IO displays -->
+      <div id="IOframe_hidden" display="none">
+                <tr><img id="TopLimitLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Top Limit Sensor</b></img></tr>          
+                <tr><img id="EndSensor" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >End Sensor</b></img></tr>              
+      </div>
+    </div>
+    <!-- --------------------------------------------------------------------->
+    <!-- Frame Endurance Control -->
+    <!-- --------------------------------------------------------------------->
+    <div id = "Frame_Endurance">
+      <div id ="endurancerun" class="GrpFrame">
+        <h1>Endurance Run using CAN Commands</h1>
+        <div class = "InnerFrame_Endurance">
+          <div style = "float:left">
+            <span class="FontCommon"> Check the boxes below for the trays levels to be used for endurance run </span>
+            <table id="table_trayselect">
+            <tr>
+              <td></td>
+              <td></td>
+              <td style = "width:20px;">1</td>
+              <td style = "width:20px;">2</td>
+              <td style = "width:20px;">3</td>
+              <td style = "width:20px;">4</td>
+              <td style = "width:20px;">5</td>
+              <td style = "width:20px;">6</td>
+              <td style = "width:20px;">7</td>
+              <td style = "width:20px;">8</td>
+              <td style = "width:20px;">9</td>
+            </tr>
+            <tr>
+              <td>Top Cassette</td>                
+              <td>
+              <select id="sel_cassette_top" style ="width:70px;">
+                <option value="9">9-Level</option>
+                <option value="7">7-Level</option>
+                <option value="0">None</option>          
+              </select>
+              </td>          
+              <td id="top_1"><input id="chk_lvlh_1" type = "checkbox" title="1"></input></td>
+              <td id="top_2"><input id="chk_lvlh_2" type = "checkbox" title="2"></input></td>
+              <td id="top_3"><input id="chk_lvlh_3" type = "checkbox" title="3"></input></td>
+              <td id="top_4"><input id="chk_lvlh_4" type = "checkbox" title="4"></input></td>
+              <td id="top_5"><input id="chk_lvlh_5" type = "checkbox" title="5"></input></td>
+              <td id="top_6"><input id="chk_lvlh_6" type = "checkbox" title="6"></input></td>
+              <td id="top_7"><input id="chk_lvlh_7" type = "checkbox" title="7"></input></td>
+              <td id="top_8"><input id="chk_lvlh_8" type = "checkbox" title="8"></input></td>
+              <td id="top_9"><input id="chk_lvlh_9" type = "checkbox" title="9"></input></td>
+            </tr>
+            <tr>
+              <td>Lower Cassette</td>
+              <td>
+              <select id="sel_cassette_bottom" style ="width:70px;">
+                <option value="9">9-Level</option>
+                <option value="7">7-Level</option>
+                <option value="0">None</option>          
+              </select>
+              </td>
+              <td id="bottom_1"><input id="chk_lvll_1" type = "checkbox" title="1"></input></td>
+              <td id="bottom_2"><input id="chk_lvll_2" type = "checkbox" title="2"></input></td>
+              <td id="bottom_3"><input id="chk_lvll_3" type = "checkbox" title="3"></input></td>
+              <td id="bottom_4"><input id="chk_lvll_4" type = "checkbox" title="4"></input></td>
+              <td id="bottom_5"><input id="chk_lvll_5" type = "checkbox" title="5"></input></td>
+              <td id="bottom_6"><input id="chk_lvll_6" type = "checkbox" title="6"></input></td>
+              <td id="bottom_7"><input id="chk_lvll_7" type = "checkbox" title="7"></input></td>
+              <td id="bottom_8"><input id="chk_lvll_8" type = "checkbox" title="8"></input></td>
+              <td id="bottom_9"><input id="chk_lvll_9" type = "checkbox" title="9"></input></td>  
+            </tr>          
+            </table>
+            <br>
+            <button id="btn_endcheckall" style="margin:2px">Check All</button>
+            <button id="btn_endclearall" style="margin:2px">Clear All</button>
+          </div>
+          <div style = "width:250px;float:right">
+            <div style = "height:70px;clear:right;padding:5px;float:left">
+              <table>
+                <tr><td>X-Acc<td><input id="input_end_xacc"></input></td></tr>      
+                <tr><td>Z-Acc<td><input id="input_end_zacc"></input></td></tr>
+              </table>
+            </div>
+            <div style = "height:70px;float:left;">
+              <table>
+              <tr><td><input id="chk_endurance_random" type = "checkbox"> </input></td><td><span>Randomise Trays</span></td></tr>
+              </table>
+            </div>        
+          </div>
+        </div>
+        <div class = "InnerFrame_Endurance">
+          <div id ="frame_timing" style = "float:left;width:50%;" >
+            <h1>Infomation
+            <table>
+            <tr><td>Duration</td><td><input id="textDuration"></input> mins</td></tr>
+            <tr><td>Start Time</td><td><input class="input_read" id="textERstarttime"></input></td></tr>
+            <tr><td>Elapsed Time</td><td><input class="input_read" id="textERelapsedtime"></input></td></tr>
+            <tr><td>Stop Time</td><td><input class="input_read" id="textERstoptime"></input></td></tr>
+            <tr>      
+              <td><button id="btn_startendurance">Start Endurance Run</button></td>
+              <td><button id="btn_stopendurance">Stop Endurance Run</button></td>
+            </tr>
+            </table>
+          </div>
+          <div id="frame_trayexchangetime"  style = "float:left;width = 50%">
+            <table>
+            <h1>Cycle Time</h1>
+            <tr><td>Current</td><td><input class="input_read" id="textTEx_current"></input></td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- --------------------------------------------------------------------->
+    <!-- Frame Debug Control -->
+    <!-- --------------------------------------------------------------------->
+    <div id = "Frame_Debug" >
+
+      <div id = "Frame_miscfunctions" class="GrpFrame">
+        <table>
+        <tr><td>LED Error Status</td>
+        <td><button class = "btn_debug" id="debug_getLED">Get</button></td>
+        <td><input id = "debug_LEDstatus"></input></td>
+        </tr>
+        <tr>
+        <td>Reset Runtime Flash</td>
+        <td><button class = "btn_debug" id="debug_ResetFlashErrorCnt">Reset</button></td>
+        </tr>
+        </table>
+      </div>
+ 
+      <div id = "FrameSetEncoderPos" class = "GrpFrame">    
+        <div id = "subframe_encodervalue">
+          <h1>Encoder Value</h1>
+          <table style="border-collapse:collapse;line-height:10px;">
+            <tr style = "font-weight:bold;"><td></td><td>Encoder Cnt (hex) </td></tr>
+            <tr><td>Lift Motor</td><td><input id="LiftMotorEncoder" class="InputasDisplay"readonly></input></td></tr>
+            <tr><td>Kicker Motor</td> <td><input id="KickerMotorEncoder" class="InputasDisplay" readonly></input></td></tr>
+            <tr><td>Conveyor Motor</td><td><input id="ConveyorMotorEncoder" class="InputasDisplay" readonly></input></b></td></tr>          
+            <tr><td>Pusher Motor</td><td><input id="PusherMotorEncoder" class="InputasDisplay" readonly></input></td></tr>        
+            <tr><td>Clamper Motor</td><td><input id="ClamperMotorEncoder" class="InputasDisplay" readonly></input></td></tr>
+            <tr class = "tr_narrow"></tr>
+          </table>
+        </div>
+        <div style = "float:left; clear:left;">
+          <button class = "btn_debug" id="btnReadEnc"  style = "margin-top:10px;width:130px;height:30px">Read Encoder Value</button>
+        </div>
+        <div id="subframe_encoderpos" class = "GrpInnerFrame">
+          <h1>Encoder Positions</h1>
+          <span class = "fontcommon">Click 'Set' to apply new setpoint for position</span>
+          <table style="border-style: solid;border-width:1px;margin:10px 0px 0px 0px;">
+            <tr style = "font-weight:bold;"><td>Position</td><td>Current</td><td >New Value</td></tr>
+            <tr>
+              <td>Kicker Out</td>
+              <td><input  class = "InputasDisplay" id = "input_kikroutcurrPos"></input></td>
+              <td><input class = "InputasDisplay" id = "input_KickerOutPos"></input></td>
+              <td><button class = "btn_debug" id = "btnencoderset0" class ="btn_encoderset">Set</button></td>
+            </tr>
+            <tr>
+              <td>Pusher Pickup</td>
+              <td><input class = "InputasDisplay" id = "input_pusherpickupcurrPos"></input></td>
+              <td><input class = "InputasDisplay" id = "input_pusherpickupPos"></input></td>
+              <td><button class = "btn_debug" id = "btnencoderset1" class ="btn_encoderset">Set</button></td>
+            </tr>
+            <tr>
+              <td>Pusher Tray In</td>
+              <td><input class = "InputasDisplay" id = "input_pshrtrayincurrPos"></input></td>
+              <td><input class = "InputasDisplay" id = "input_pshrtrayinPos"></input></td>
+              <td><button class = "btn_debug" id = "btnencoderset2" class ="btn_encoderset">Set</button></td>
+            </tr>
+            <tr><td>Pusher Tray Touch</td>
+              <td><input class = "InputasDisplay"  id = "input_pshrtraytouchcurrPos"></input></td>
+              <td><input class = "InputasDisplay" id = "input_pshrtraytouchPos"></input></td>
+              <td><button class = "btn_debug" id = "btnencoderset3" class ="btn_encoderset">Set</button></td>
+            </tr>
+            <tr>
+              <td>Clamper Standby</td>
+              <td><input class = "InputasDisplay" id = "input_clprstandbycurrPos"></input></td>
+              <td><input class = "InputasDisplay" id = "input_clprstandbyPos"></input></td>
+              <td><button class = "btn_debug" id = "btnencoderset4" class ="btn_encoderset">Set</button></td>
+            </tr>
+            <tr>
+              <td>Clamper Clamping</td>
+              <td><input class = "InputasDisplay" id = "input_clprclampcurrPos"></input></td>
+              <td><input class = "InputasDisplay" id = "input_clprclampPos"></input></td>
+              <td><button class = "btn_debug" id = "btnencoderset5" class ="btn_encoderset">Set</button></td>
+              </tr>
+          </table>
+          <div>
+            <input id="check_newpossrc" type = "checkbox" style = "background-color:#600000;">
+            <span class = "fontcommon">Use current encoder value, instead of 'New Value' field</span>
+            </input>            
+          </div>
+          <div style = "float:left">
+            <button class = "btn_debug" id="btnReadEncPos"  style = "margin-top:10px;width:130px;height:30px">Read Defined Pos</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="Layer_MessageLog">
+      <div id="MessageLogObj"></div>
+      <button id="ButtonGridClear" title="Clear content in message window.">Clear</button>
+      <button id="ButtonDebugLog" title="Creates Debug Window">Start DebugLog</button>        
+    </div>    
+ 
+  </body>
+</html>
