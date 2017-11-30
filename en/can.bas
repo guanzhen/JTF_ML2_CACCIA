@@ -45,7 +45,6 @@ If CANConfig.Config = 0 Then
   DebugMessage "CANID: (d)" & CANID
   If InitCAN(CANID,CANConfig.Config) = 1 Then
     Visual.Script("dhxWins").unload()
-    'Visual.Select("Layer_CanSetup").Style.Display = "none"
     Visual.Select("Layer_MessageLog").Style.Display = "block"
     Visual.Select("Layer_TabStrip").Style.Display = "block"    
     StartIOThread 1
@@ -103,7 +102,7 @@ Function InitCAN ( CANID, Config )
     InitCAN = 1
   Else
     InitCAN = 0
-    LogAdd "No CAN Manager!"
+    LogAdd "Unable to create CAN Manager!"
   End If
 End Function
 
@@ -816,4 +815,67 @@ Function CANSendTACMD(Cmd,SubCmd,SlotNo,Division,DataLen)
     CANSendTACMD = False
   End If
   
+End Function
+
+Function ValidateFeederID( FeederID )
+  Visual.Select("inputFeederID").Value = FeederID  
+  Visual.Select("inputFeederID").style.backgroundColor = "white"
+  If Len(FeederID) < 12 Then
+    Visual.Select("inputFeederID").style.backgroundColor = "red"
+  Elseif Visual.Select("inputFeederID").Value = "79ASMDH09999" Then
+    Visual.Select("inputFeederID").style.backgroundColor = "red"
+    LogAdd "No FeederID programmed!"
+    MsgBox "No FeederID programmed!"
+  End If
+  
+End Function
+
+Function GetFeederID ()
+  Dim CANData,i
+  Dim FeederID
+  Memory.Get "CANData",CANData
+  CANData.Data(0) = $(PARAM_START)
+  'Start
+  'FeederID = "------------"
+  If CANSendGetMC($(CMD_GET_DATA),$(MC_FEEDER_IDENT),SLOT_NO,1,1) = True Then
+    'Get line1
+    CANData.Data(0) = $(PARAM_LINE)
+    CANSendGetMC $(CMD_GET_DATA),$(MC_FEEDER_IDENT),SLOT_NO,1,1
+    For i = 2  To 6
+      FeederID = FeederID & chr(CANData.Data(i))
+    Next  
+    'Get line2
+    CANData.Data(0) = $(PARAM_LINE)
+    CANSendGetMC $(CMD_GET_DATA),$(MC_FEEDER_IDENT),SLOT_NO,1,1
+    For i = 2  To 6
+      FeederID = FeederID & chr(CANData.Data(i))
+    Next   
+    'Get line3
+    CANData.Data(0) = $(PARAM_LINE)
+    CANSendGetMC $(CMD_GET_DATA),$(MC_FEEDER_IDENT),SLOT_NO,1,1
+    For i = 2  To 6
+      FeederID = FeederID & chr(CANData.Data(i))
+    Next   
+    'Get line4
+    CANData.Data(0) = $(PARAM_LINE)
+    CANSendGetMC $(CMD_GET_DATA),$(MC_FEEDER_IDENT),SLOT_NO,1,1
+    For i = 2  To 3
+      FeederID = FeederID & chr(CANData.Data(i))
+    Next
+    'send end
+    CANData.Data(0) = $(PARAM_END)
+    CANSendGetMC $(CMD_GET_DATA),$(MC_FEEDER_IDENT),SLOT_NO,1,1
+  Else
+    FeederID = "????????????"
+  End If
+  ValidateFeederID FeederID
+  GetFeederID = FeederID
+End Function
+
+Function OnClick_ButtonDebug ( Reason )
+  Dim FeederID
+  Dim FeederID2
+  FeederID = GetFeederID()
+  'FeederID2 = String.ComposeString(FeederID,,10)
+  LogAdd FeederID
 End Function

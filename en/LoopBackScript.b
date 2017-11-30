@@ -4,11 +4,14 @@ Dim exit_condition
 Dim Pos_KikrOut,Pos_Pshrpickup,Pos_pshrtrayin,Pos_pshrtraytouch,Pos_clprstandby,pos_clprclamp
 Dim CAN2,CAN2DBG,CAN2RX1,CAN2RX2
 Dim Enccnt_Kikr,Enccnt_Clpr,Enccnt_Pshr,Enccnt_Elvt,Enccnt_Cnvy
+Dim State
+Dim FeederID
+FeederID = "79ASMDH01999"
 CANID     = "0x6e8"
 CANIDDBG  = "0x6eA"
 CANIDRX1  = "0x4e8"
 CANIDRX2  = "0x0e8"
-
+State = 0
 
 CAN2     = "0x500"
 CAN2DBG  = "0x503"
@@ -80,11 +83,57 @@ Enccnt_Cnvy = 0x00000055
         Switch (CANRXMsg.Data[1])
         {
           Case 0xD2:{SendMsg{CANIDRX1}(CANRXMsg.Data[0],0x00,0x07,0x07)}
-                    
+
           Case 0xD5:
           {
             SendMsg{CANIDRX1}(CANRXMsg.Data[0],0x00,0xFF)
           }
+          Case 0xA3:
+          {
+            Switch (CANRXMsg.Data[2])
+            {            
+              Case 0: 
+              {
+                State = 1
+                SendMsg{CANIDRX1}(CANRXMsg.Data[0],0x00)
+              }
+              Case 1:
+              {
+                 Switch (State)
+                 {
+                 Case 0 :
+                 {
+                    SendMsg{CANIDRX1}(CANRXMsg.Data[0],0x04)
+                 }
+                 Case 1 :
+                 {
+                    SendMsg{CANIDRX1}(CANRXMsg.Data[0],0x00,FeederID[0],FeederID[1],FeederID[2],FeederID[3],FeederID[4])
+                    State = State + 1
+                 }
+                 Case 2 :
+                 {
+                    SendMsg{CANIDRX1}(CANRXMsg.Data[0],0x00,FeederID[5],FeederID[6],FeederID[7],FeederID[8],FeederID[9])
+                    State = State + 1
+                 }
+                 Case 3 :
+                 {
+                    SendMsg{CANIDRX1}(CANRXMsg.Data[0],0x00,FeederID[10],FeederID[11])
+                    State = State + 1
+                 }
+                 Else 
+                 {
+                    SendMsg{CANIDRX1}(CANRXMsg.Data[0],0x10)
+                 }
+                 }
+              }
+              Case 2:
+              {
+                  SendMsg{CANIDRX1}(CANRXMsg.Data[0],0x00)
+                  State = 0
+              }
+            }
+          }
+          
           Else
           {
             SendMsg{CANIDRX1}(CANRXMsg.Data[0],0x00,0x00)

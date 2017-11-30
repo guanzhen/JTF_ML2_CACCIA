@@ -108,6 +108,7 @@ Function OnClick_btnGetApp ( Reason )
 
   GetFirmwareInfo
   GetCassetteInfo
+  GetFeederID
   
 End Function
 

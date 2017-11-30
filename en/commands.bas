@@ -2,14 +2,13 @@
 '------------------------------------------------------------------
 Function Command_GetFW(ByVal AppBios, ByRef MajorValue, ByRef MinValue)
   Dim CanSendArg,CanReadArg,CANConfig
-  Dim CanManager, Result, CANData
+  Dim CanManager, Result
 
   Set CanSendArg = CreateObject("ICAN.CanSendArg")
   Set CanReadArg = CreateObject("ICAN.CanReadArg")
   
   If Memory.Exists("CanConfig") Then
     Memory.Get "CanConfig",CanConfig
-    Memory.Get "CANData",CANData
   End If
   
   With CanSendArg
