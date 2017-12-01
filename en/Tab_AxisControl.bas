@@ -14,6 +14,7 @@ Function Init_Window_AxisControl
   Visual.Select("input_clprstandbyPos").SetValidation VALIDATE_INPUT_MASK_UI4,"OrangeRed",10
   Visual.Select("input_clprclampPos").SetValidation VALIDATE_INPUT_MASK_UI4,"OrangeRed",10
   OnChange_Command_AxisMoveList 0
+  OnChange_Command_AxisMoveList2 0
 End Function
 
 '------------------------------------------------------------------
@@ -190,7 +191,7 @@ End Function
 Function OnClick_btn_elvtbrakeoff ( Reason )
   Command_Debug_AxisBrake 1,0
 End Function
-
+ 
 '------------------------------------------------------------------
 ' Supporting Functions
 '------------------------------------------------------------------
@@ -218,26 +219,39 @@ Function GetRefRun ( Axis )
  End Function
 
 '------------------------------------------------------------------
+Function ChangeAxisMoveList( source , item )
+  Visual.Select(item).RemoveAll  
+  If Visual.Select(source).SelectedItemAttribute("Value") = 2 Then
+    Visual.Select(item).addItem "Step In", 0
+    Visual.Select(item).addItem "Step Out", 1
+  Elseif Visual.Select(source).SelectedItemAttribute("Value") = 3 Then  
+    Visual.Select(item).addItem "Retract", 0
+    Visual.Select(item).addItem "Kick", 1
+  Elseif Visual.Select(source).SelectedItemAttribute("Value") = 4 Then
+    Visual.Select(item).addItem "Home", 0
+    Visual.Select(item).addItem "Forward", 1  
+    Visual.Select(item).addItem "Backward", 2
+  Elseif Visual.Select(source).SelectedItemAttribute("Value") = 5 Then
+    Visual.Select(item).addItem "Home", 0
+    Visual.Select(item).addItem "Standby", 1  
+    Visual.Select(item).addItem "Clamp", 2
+  End If
+
+End Function
+
+'------------------------------------------------------------------
 
 Function OnChange_Command_AxisMoveList ( Reason )
-  'DebugMessage "Select " & Visual.Select("Command_AxisMoveList").SelectedItemName &" "&Visual.Select("Command_AxisMoveList").SelectedItemAttribute("Value")
-  Visual.Select("Command_AxisMoveLevel").RemoveAll  
-  If Visual.Select("Command_AxisMoveList").SelectedItemAttribute("Value") = 2 Then
-    Visual.Select("Command_AxisMoveLevel").addItem "Step In", 0
-    Visual.Select("Command_AxisMoveLevel").addItem "Step Out", 1
-  Elseif Visual.Select("Command_AxisMoveList").SelectedItemAttribute("Value") = 3 Then  
-    Visual.Select("Command_AxisMoveLevel").addItem "Retract", 0
-    Visual.Select("Command_AxisMoveLevel").addItem "Kick", 1
-  Elseif Visual.Select("Command_AxisMoveList").SelectedItemAttribute("Value") = 4 Then
-    Visual.Select("Command_AxisMoveLevel").addItem "Home", 0
-    Visual.Select("Command_AxisMoveLevel").addItem "Forward", 1  
-    Visual.Select("Command_AxisMoveLevel").addItem "Backward", 2
-  Elseif Visual.Select("Command_AxisMoveList").SelectedItemAttribute("Value") = 5 Then
-    Visual.Select("Command_AxisMoveLevel").addItem "Home", 0
-    Visual.Select("Command_AxisMoveLevel").addItem "Standby", 1  
-    Visual.Select("Command_AxisMoveLevel").addItem "Clamp", 2
-  End If
+  ChangeAxisMoveList "Command_AxisMoveList","Command_AxisMoveLevel"
 End Function
+
+'------------------------------------------------------------------
+
+Function OnChange_Command_AxisMoveList2 ( Reason )
+  ChangeAxisMoveList "Command_AxisMoveList2","Command_AxisMoveLevel2"
+End Function
+
+'------------------------------------------------------------------
 
 Function OnClick_btnMoveAxis ( Reason )
   If GetRefRun(REF_ALL) Then

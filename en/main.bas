@@ -53,8 +53,8 @@ Option Explicit
 ' Constants
 '------------------------------------------------------------------
 
-Const APP_WIDTH = 800
-Const APP_HEIGHT = 620
+Const APP_WIDTH = 1024
+Const APP_HEIGHT = 660
 Const AppVersionMax = 00
 Const AppVersionMin = 01
 Const MAX_LOG_ROWS = 100
