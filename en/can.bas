@@ -8,7 +8,8 @@ Const SLOT_NO = 29
 
 Function btn_CanConnect( id, id1 )
   Dim Net,Baud,CANConfig, CANID,CANData,i
-  Dim text
+  Dim Config, Release, TitleString
+  Dim ConnectType
   set CANConfig = Object.CreateRecord( "Net", "CANIDcmd", "CANIDAck", "CANIDPub","Baudrate","Config","CANIDvalid" )
   Set CANData = CreateObject( "MATH.Array" )
   
@@ -24,19 +25,29 @@ Function btn_CanConnect( id, id1 )
 
 If CANConfig.Config = 0 Then
     CANConfig.Baudrate = "250"
-    text = "[Standalone]"
+    ConnectType = "[Standalone]"
     Visual.Select("inputCANID").Value = "6e8"
   Elseif CANConfig.Config = 1 Then
     CANConfig.Baudrate = "1000"
     Visual.Select("inputCANID").Value = "500"
-    text = "[XFCU]"
+    ConnectType = "[XFCU]"
     Visual.Select("btnAssignCANID").Style.Display  = "none"
   End If
   
   DebugMessage "Selected Config :"&CANConfig.Config
   DebugMessage "Selected CANConfig.Net :"&CANConfig.Net + 1
   
-  Window.Title = "Tesla Control " & text & " - Net " & CANConfig.Net + 1
+  If Not System.Configuration ("Version", Config, "Package") Then
+    Release = "missing"
+  Else
+    Release = "V " & Config.Param(0)
+  End If
+  If Not System.Configuration( "Title", Config, "Package") Then
+    TitleString = "Missing title"
+  End If
+  TitleString = Config.Param(0) & " " & Release & " " & ConnectType & " - Net " & CANConfig.Net + 1
+  'TitleString = "Tesla Control " & ConnectType & " - Net " & CANConfig.Net + 1
+  Window.Title = TitleString
   CanConfig.CANIDvalid = 1
   
   Memory.Set "CANConfig",CANConfig
