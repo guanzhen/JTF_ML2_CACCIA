@@ -263,6 +263,15 @@ End Function
 
 '------------------------------------------------------------------
 
+Function OnClick_btnMoveAxis2 ( Reason )
+  If GetRefRun(REF_ALL) Then
+  Command_Debug_MoveAxis Visual.Select("Command_AxisMoveList2").SelectedItemAttribute("Value"),Visual.Select("Command_AxisMoveLevel2").SelectedItemAttribute("Value"),Visual.Select("Command_AxisMoveLevel").SelectedItemName
+  Else
+    LogAdd "Please Reference Tesla First"
+  End If
+End Function
+'------------------------------------------------------------------
+
 Function OnClick_btnIndividualRefRun(Reason)
   Dim Axis 
     'Read IO and check if sensor is active
