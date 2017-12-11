@@ -176,6 +176,7 @@ Function Monitor_EnduranceRun ( )
     'End Loop Do while Memory.PrepCmd_Inprogress = 1     
     Loop Until Memory.PrepCmd_Inprogress = 0
     
+    System.Delay(500)
     'Previous tray prepare cycle is completed
     'DebugMessage "Tray Done"      
     'System.Delay(50)
