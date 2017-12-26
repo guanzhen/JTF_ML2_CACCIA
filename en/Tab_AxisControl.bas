@@ -270,6 +270,35 @@ Function OnClick_btnMoveAxis2 ( Reason )
     LogAdd "Please Reference Tesla First"
   End If
 End Function
+
+'------------------------------------------------------------------
+
+Function OnClick_btnIndividualRefRun2(Reason)
+  Dim Axis 
+    'Read IO and check if sensor is active
+    ReadIO
+    If Memory.SignalArray.Data(MotorPwrOff) = 1 Then
+      Axis = Visual.Select("Command_AxisRefRunList2").SelectedItemAttribute("value")
+      DebugMessage "Reference Run Axis: " & Axis
+    
+      If Axis = 1 Then
+        Command_Debug_AxisBrake 1,0
+        System.Delay(100)
+      End If
+      
+      Command_Debug_AxisRefRun Axis    
+        
+      If Axis = 1 Then
+        LogAdd "Waiting 30 seconds to enable Lift brake..."
+        System.Delay(30000)
+        Command_Debug_AxisBrake 1,1      
+      End If      
+     Else
+      LogAdd "No power to motors. Please lock Tesla door/close the safety loop"     
+     End If
+   
+End Function
+
 '------------------------------------------------------------------
 
 Function OnClick_btnIndividualRefRun(Reason)

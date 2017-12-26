@@ -6,7 +6,7 @@ Dim CAN2,CAN2DBG,CAN2RX1,CAN2RX2
 Dim Enccnt_Kikr,Enccnt_Clpr,Enccnt_Pshr,Enccnt_Elvt,Enccnt_Cnvy
 Dim State
 Dim FeederID
-FeederID = "79ASMDH01999"
+FeederID = "79ASMDE00001"
 CANID     = "0x6e8"
 CANIDDBG  = "0x6eA"
 CANIDRX1  = "0x4e8"
