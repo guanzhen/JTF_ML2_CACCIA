@@ -51,20 +51,29 @@
 #define JTF_DBG_AXIS_REFRUN        0xB6
 #define JTF_DBG_ENDURANCE          0xB7
 #define JTF_DBG_SAVEOFFSET         0xB8
+#define JTF_DBG_DEFAULT_LIFT       0xB9
+#define JTF_DBG_DEFAULT_DOOR       0xBA
+#define JTF_DBG_PUSHBACK           0xBB
+#define JTF_DBG_LIFTPOS            0xBC
+#define JTF_DBG_DOORPOS            0xBD
 
 //These are merged into ptkl_be.h
 //Public Errors
-#define PB_ERROR_JTF3_AXIS_ERROR   0x55
 #define PB_ERROR_JTF3_DOOR         0x54
+#define PB_ERROR_JTF3_AXIS_ERROR   0x55
 #define PB_ERROR_JTF3_BUSY         0x56
 #define PB_ERROR_JTF3_RFID         0x57
 
-#define CMD_PREPARE_REF_RUN                 0x5C
-#define CMD_PREPARE_TRAY                    0x60
-#define CMD_PREPARE_QUIT_REFILL_POSITION    0x5D
-#define CMD_PREPARE_TRANSPORT               0x67
-
+#define CMD_PREPARE_REF_RUN                     0x5C
+#define CMD_PREPARE_QUIT_REFILL_POSITION        0x5D
+#define CMD_PREPARE_MOVE_CALIBRATION_POSITION   0x5E
+#define CMD_PREPARE_MOVE_OFFSET                 0x5F
+#define CMD_PREPARE_TRAY                        0x60
+#define CMD_PREPARE_REQUEST_COMPONENT           0x62
+#define CMD_PREPARE_GIVE_COMPONENT              0x65
+#define CMD_PREPARE_TRANSPORT                   0x67
 
 #define MC_JTF3_CASSETTE_TYPE     0xD2
 #define MC_JTF3_RFID_DATA	        0xD3
+#define MC_JTF3_SENSOR_STATE      0xD4
 #define MC_JTF3_REFERENCE_STATE   0xD5

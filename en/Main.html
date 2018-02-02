@@ -120,10 +120,10 @@
     </div>
     <!-- --------------------------------------------------------------------->
     <!-- Frame Axis Control -->
-    <!-- --------------------------------------------------------------------->
+    <!-- --------------------------------------------------------------------->    
     <div id = "Frame_AxisControl">
       <div id= "FrameAxisInfomation" class= "GrpFrame">
-        <div id= "FrameAxisRefInfo" class= "GrpInnerFrame">
+        <div id= "FrameAxisRefInfo" >
           <h1>Reference Information </h1>
           <div id="InnerFrame_RefDisplay">
           <table>
@@ -150,13 +150,27 @@
             <tr>
               <td>Clamper Axis</td>
               <td><input id="ClamperMotorRefRun" class="InputasDisplay" readonly></td>    
-            </tr>
+            </tr>            
             <tr>
               <td><button class="btn_axis_control" id="btnRefRun" >Reference Run</button></td>         
               <td><button class="btn_axis_control" id="btnGetRefInfo" >Get Ref Info</button></td>
             </tr>    
           </table>
           </div>
+        </div>
+        
+        <div id="FrameReferencePositions">
+          <h1>Level set points</h1>
+          <table>
+            <tr>
+              <td>Lift</td>
+              <td><input id="refpos_lift" class="InputasDisplay" readonly></td>          
+            </tr>
+            <tr>
+              <td style = "width:100px">Door</td>
+              <td><input id="refpos_door" class="InputasDisplay" readonly></td>          
+            </tr>
+          </table>
         </div>
         
         <div id="FrameAxisMiscControl">

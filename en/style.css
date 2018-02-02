@@ -126,11 +126,11 @@ width: 100%;
 height: 100%; 
 }
 #FrameAxisInfomation { width:100%; padding:5px;}
-#FrameAxisRefInfo { float:left;}
+#FrameAxisRefInfo { float:left; width:33%}
 #FrameAxisMiscControl {float:right;width:400px;}
 #FrameAxisElevOffsetCtrl {width:100%; padding:5px;}
-#FrameAxisIndividual {float:right;width:400px;}
-
+#FrameAxisIndividual {float:right;width:33%}
+#FrameReferencePositions  {float:left;width:33%}
 /* From IO */
 #Sensors {border-collapse: collapse; table-layout: fixed; height: auto; width = 50%;}
 #Frame_Sensors { float:left;}

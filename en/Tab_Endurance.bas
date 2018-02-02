@@ -163,20 +163,20 @@ Function Monitor_EnduranceRun ( )
       End If
       
       'Check Timer Stop Condition
-      If sig_timerend.wait(50) Then
+      If sig_timerend.wait(1000) Then
         DebugMessage "Timer Ended!"
         loop_enable = 0       
       End If
       
       'Check button stop condition.
-      If sig_externalstop.wait(50) Then
+      If sig_externalstop.wait(1000) Then
         loop_enable = 0
       End If  
       
     'End Loop Do while Memory.PrepCmd_Inprogress = 1     
     Loop Until Memory.PrepCmd_Inprogress = 0
     
-    System.Delay(500)
+    System.Delay(1000)
     'Previous tray prepare cycle is completed
     'DebugMessage "Tray Done"      
     'System.Delay(50)

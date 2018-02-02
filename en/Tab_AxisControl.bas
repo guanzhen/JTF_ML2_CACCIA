@@ -88,6 +88,9 @@ End Function
 
 '------------------------------------------------------------------
 Function OnClick_btnGetRefInfo ( Reason )
+  Dim CANData
+  Memory.Get "CANData",CANData
+  
   LogAdd "Get Reference and Tray Info"
   GetRefRun REF_ALL
   GetRefRun REF_ELVT
@@ -95,7 +98,17 @@ Function OnClick_btnGetRefInfo ( Reason )
   GetRefRun REF_CLPR
   GetRefRun REF_KIKR
   GetRefRun REF_CNVY
-  Command_GetCnvyTrayInfo
+  
+  Memory.CANData(0) = $(JTF_DBG_DOORPOS)
+  If CANSendTACMD($(CMD_GET_DATA),$(MC_TEST_PRODUCTION),SLOT_NO,1,1) = True Then
+    Visual.Select("refpos_door").Value = String.Format("0x%08X", Lang.MakeLong4(CANData.Data(2),CANData.Data(3),CANData.Data(4),CANData.Data(5)))
+  End If
+
+  Memory.CANData(0) = $(JTF_DBG_LIFTPOS)
+  If CANSendTACMD($(CMD_GET_DATA),$(MC_TEST_PRODUCTION),SLOT_NO,1,1) = True Then
+    Visual.Select("refpos_lift").Value = String.Format("0x%08X", Lang.MakeLong4(CANData.Data(2),CANData.Data(3),CANData.Data(4),CANData.Data(5)))
+  End If
+  
 End Function 
 '------------------------------------------------------------------
 Function OnClick_btnencoderset0 ( Reason )
