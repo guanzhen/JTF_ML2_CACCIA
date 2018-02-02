@@ -66,13 +66,13 @@ Enccnt_Cnvy = 0x00000055
       }
       Case 0x60:
       {
-        SendMsg{CANIDRX1}( CANRXMsg.Data[0],0x00,0x01)
+        SendMsg{CANIDRX1}( CANRXMsg.Data[0],0x4c,0x01,0x00,0x00)
         delay 200
-        SendMsg{CANIDRX2}( 0x90,0x00,0x01)
-        delay 2000
-        SendMsg{CANIDRX2}( 0x40,0xC8,0x01)
-        delay 100        
-        SendMsg{CANIDRX2}( 0x00,0x00,0x01)
+        'SendMsg{CANIDRX2}( 0x90,0x00,0x01)
+        'delay 2000
+        'SendMsg{CANIDRX2}( 0x40,0xC8,0x01)
+        'delay 100        
+        'SendMsg{CANIDRX2}( 0x00,0x00,0x01)
       }
       Case 0xFF:
       {
