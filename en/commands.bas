@@ -41,7 +41,6 @@ Function Command_GetFW(ByVal AppBios, ByRef MajorValue, ByRef MinValue)
         MajorValue = CanReadArg.Data(4)
         MinValue   = CanReadArg.Data(5)      
       End If
-      LogAdd ("Read Firmware")
     Else
       Command_GetFW = 0
       LogAdd ("Read Firmware Timeout")
