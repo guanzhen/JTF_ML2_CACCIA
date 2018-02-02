@@ -59,8 +59,6 @@ If CANConfig.Config = 0 Then
     Visual.Select("Layer_MessageLog").Style.Display = "block"
     Visual.Select("Layer_TabStrip").Style.Display = "block"    
     StartIOThread 1
-  Else
-    MsgBox "Cannot Open CAN Manager on Net " & CANConfig.Net + 1 & "!"
   End If
   
 End Function
