@@ -526,8 +526,12 @@ Function CANSendGetMC(Cmd,SubCmd,SlotNo,Division,DataLen)
       Memory.Set "CANData",CANData
       'DebugMessage "CANData:" & String.Format("%02X %02X %02X %02X %02X %02X %02X %02X",CanReadArg.Data(0),CanReadArg.Data(1) ,CanReadArg.Data(2) ,CanReadArg.Data(3) ,CanReadArg.Data(4) ,CanReadArg.Data(5) ,CanReadArg.Data(6) ,CanReadArg.Data(7))
     Else
-      LogAdd "Command NOK: " & GetErrorInfo( CanReadArg ) & " (" & CanReadArg.Format & ")"
-      CANSendGetMC = False
+      If Not CanReadArg.Data(1) = $(ACK_NO_MORE_DATA) AND SubCmd = $(MC_FEEDER_IDENT) Then
+        LogAdd "Command NOK: " & GetErrorInfo( CanReadArg ) & " (" & CanReadArg.Format & ")"      
+        CANSendGetMC = False
+      Else
+        CANSendGetMC = True
+      End If
     End If
     CanManager.Deliver = True
   Else
@@ -872,8 +876,6 @@ Function GetFeederID ()
       FeederID = FeederID & chr(CANData.Data(i))
     Next
     'send end
-    CANData.Data(0) = $(PARAM_END)
-    CANSendGetMC $(CMD_GET_DATA),$(MC_FEEDER_IDENT),SLOT_NO,1,1
   Else
     FeederID = "????????????"
   End If
