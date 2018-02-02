@@ -205,6 +205,12 @@ Sub GetFirmwareInfo ( )
   Else
     Visual.Select("textAppVersion").Value = "-- --"
   End If
+        
+  If AppMin < eSWVersionMin OR AppMaj < eSWVersionMaj Then
+    LogAdd ("Warning: eSW version is lower than V" & String.Format("%02X.%02X", eSWVersionMaj,eSWVersionMin) & " Not all functions will work properly with CACCIA module!")
+  Else
+    LogAdd ("Read Firmware")
+  End If
   If Command_GetFW($(PARAM_DL_ZIEL_BIOS),AppMaj,AppMin) = 1 Then
     Visual.Select("textBiosVersion").Value = String.Format("%02X.%02X", AppMaj,AppMin)
   Else
