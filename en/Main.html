@@ -123,118 +123,116 @@
     <!-- --------------------------------------------------------------------->    
     <div id = "Frame_AxisControl">
       <div id= "FrameAxisInfomation" class= "GrpFrame">
-        <div id= "InnerFrameAxisRefInfo">
-          <h1>Reference Information </h1>
-          <table>
-            <tr>
-              <td>OverAll</td>
-              <td><input id="OverAllRefRun" class="InputasDisplay" readonly></td>          
-            </tr>
-            <tr>
-              <td>Lift Axis</td>
-              <td><input id="LiftMotorRefRun" class="InputasDisplay" readonly></td>          
-            </tr>
-            <tr>
-              <td>Kicker Axis</td>
-              <td><input id="KickerMotorRefRun" class="InputasDisplay" readonly></td>    
-            </tr>
-            <tr>
-              <td>Conveyor Axis</td>
-              <td><input id="ConveyorMotorRefRun" class="InputasDisplay" readonly></td>    
-            </tr>
-            <tr>
-              <td>Pusher Axis</td>
-              <td><input id="PusherMotorRefRun" class="InputasDisplay" readonly></td>    
-            </tr>
-            <tr>
-              <td>Clamper Axis</td>
-              <td><input id="ClamperMotorRefRun" class="InputasDisplay" readonly></td>    
-            </tr>            
-            <tr>
-              <td><button class="btn_axis_control" id="btnRefRun" >Reference Run</button></td>         
-              <td><button class="btn_axis_control" id="btnGetRefInfo" >Get Ref Info</button></td>
-            </tr>    
-          </table>
-        </div>
-        
-        <div id="InnerFrameAxisMiscControl">        
-          <table>            
-            <tr><td><h1>Lift Set Point</td><td><input id="refpos_lift" class="InputasDisplay" readonly></td></tr>
-            <tr><td><h1>Door Set Point</td><td><input id="refpos_door" class="InputasDisplay" readonly></td>            </tr>
-            <tr><td><h1>Conveyor Tray </h1></td><td><input id="inputTrayConveyor" class="InputasDisplay" readonly></td></tr>
-            <tr><td colspan = "3"><hr></td></tr>
-            <tr>
-              <td><h1>Lift Brake</h1></td>
-              <td><button class="btn_axis_control" id="btn_elvtbrakeon"> Brake</button></td>
-              <td><button class="btn_axis_control" id="btn_elvtbrakeoff"> Release</button></td>
-            </tr>
-            <tr>
-              <td><h1>Door Controls</h1></td>
-              <td><button class="btn_axis_control" id = "btnDoorOpen" >Unlock</button></td>
-              <td><button class="btn_axis_control" id = "btnDoorClose" >Lock+Hold</button></td>
-            </tr>              
-          </table>     
-        </div>  
-      </div>
-      
-      <div id = "FrameAxisElevOffsetCtrl" class = "GrpFrame">
-        <div id = "InnerFrameOffSetCtrl">
-            <h1>Lift Offset Control</h1>
-            <!--
-                <span>1. Move Lift to position to set.</span><br>
-                <span>2. Make adjustments using '+' and '-' buttons.</span><br>
-                <span>3. Click on 'Set New Pos' to save the position.</span><br> 
-                -->
-            <table>
-              <tr class = "seperator">
-                <td><button class="btn_axis_control" id = "btnPositive"   style = "width=75px;">+</button>
-                <td>Tray Index Position</td>
-                <td><button class="btn_axis_control" id = "btnMovetoMidIndexPos">Move to Pos</button></td>
-                <td><button class="btn_axis_control" id = "btnSetMidIndexPos">Set New Pos</button></td>
-                <td><button class="btn_axis_control" id = "btnSetMidIndexPosDefault">Set Default</button></td>
-              </tr>
-              <tr>
-                <td>
-                  <select class = "select_axiscontrol" id = "SelPosControlStep" style = "width=75px;">
-                  <option value = "45">0.045mm</option>
-                  <option value = "100">0.1mm</option>
-                  <option value = "500">0.5mm</option>
-                  <option value = "1000">1mm</option>
-                  <option value = "5000">5mm</option>                  
-                  <option value = "10000">10mm</option>
-                  </select>
-                </td>
-               <td colspan = "4"><hr /></td>
-              </tr>
-              <tr>
-                <td><button class="btn_axis_control" id = "btnNegative"   style = "width=75px;">-</button>      
-                <td>Door Position</td>
-                <td><button class="btn_axis_control" id = "btnMovetoDoorPos">Move to Pos</button></td>
-                <td><button class="btn_axis_control" id = "btnSetDoorPos">Set New Pos</button></td>
-                <td><button class="btn_axis_control" id = "btnSetDoorPosDefault">Set Default</button></td>
-              </tr>
-            </table>
-        </div>     
-      
-        <div id = "InnerFrameAxisIndividual">
+        <h1>Reference Information</h1>
+        <div style = "float:left">
         <table>
           <tr>
-            <td rowspan = "2"><h1>Ind. Axis Functions</h1></td>
-            <tr><td><select class="select_axiscontrol" id="Command_AxisMoveList" >
-              <option value="2">Conveyor</option>
-              <option value="3">Kicker</option>
-              <option value="4">Pusher</option>
-              <option value="5">Clamper</option>
-            </select></td>
-            <td rowspan = "2"><button class="btn_axis_control"  id="btnMoveAxis">Move</button></td>
+            <td style = "width:120px;">OverAll</td>
+            <td><input id="OverAllRefRun" class="InputasDisplay" readonly></td>          
+          </tr>
+          <tr>
+            <td>Lift Axis</td>
+            <td><input id="LiftMotorRefRun" class="InputasDisplay" readonly></td>          
+          </tr>
+          <tr>
+            <td>Kicker Axis</td>
+            <td><input id="KickerMotorRefRun" class="InputasDisplay" readonly></td>    
+          </tr>
+          <tr>
+            <td>Conveyor Axis</td>
+            <td><input id="ConveyorMotorRefRun" class="InputasDisplay" readonly></td>    
+          </tr>
+          <tr>
+            <td>Pusher Axis</td>
+            <td><input id="PusherMotorRefRun" class="InputasDisplay" readonly></td>    
+          </tr>
+          <tr>
+            <td>Clamper Axis</td>
+            <td><input id="ClamperMotorRefRun" class="InputasDisplay" readonly></td>    
+          </tr>
+          <tr><td>Lift Set Point</td><td><input id="refpos_lift" class="InputasDisplay" readonly></td></tr>
+          <tr>
+            <td>Door Set Point</td><td><input id="refpos_door" class="InputasDisplay" readonly></td>
+          </tr>
+          <tr><td>Conveyor Tray </td><td><input id="inputTrayConveyor" class="InputasDisplay" readonly></td></tr>            
+        </table>
+        </div>
+        <div style ="float:left"><button id="btnGetRefInfo" >Get Ref Info</button></div>
+      </div>
+
+      <div id = "FrameAxisElevOffsetCtrl" class = "GrpFrame">
+        <h1>Lift Offset Control</h1>
+        <!--
+            <span>1. Move Lift to position to set.</span><br>
+            <span>2. Make adjustments using '+' and '-' buttons.</span><br>
+            <span>3. Click on 'Set New Pos' to save the position.</span><br> 
+            -->
+        <table>
+          <tr class = "seperator">
+            <td><button class="btn_axis_control" id = "btnPositive"   style = "width=100px;">+</button>
+            <td>Tray Index Position</td>
+            <td><button class="btn_axis_control" id = "btnMovetoMidIndexPos">Move to Pos</button></td>
+            <td><button class="btn_axis_control" id = "btnSetMidIndexPos">Set New Pos</button></td>
+            <td><button class="btn_axis_control" id = "btnSetMidIndexPosDefault">Set Default</button></td>
           </tr>
           <tr>
             <td>
-            <td><select class="select_axiscontrol" id="Command_AxisMoveLevel" ></select></td>
-            <td>
-          </tr>          
+              <select class = "select_axiscontrol" id = "SelPosControlStep" style = "width=100px;">
+              <option value = "45">0.045mm</option>
+              <option value = "100">0.1mm</option>
+              <option value = "500">0.5mm</option>
+              <option value = "1000">1mm</option>
+              <option value = "5000">5mm</option>                  
+              <option value = "10000">10mm</option>
+              </select>
+            </td>
+           <td colspan = "4"><hr /></td>
+          </tr>
           <tr>
-              <td><h1>Ind. Axis Reference Run</h1></td>
+            <td><button class="btn_axis_control" id = "btnNegative"   style = "width=100px;">-</button>      
+            <td>Door Position</td>
+            <td><button class="btn_axis_control" id = "btnMovetoDoorPos">Move to Pos</button></td>
+            <td><button class="btn_axis_control" id = "btnSetDoorPos">Set New Pos</button></td>
+            <td><button class="btn_axis_control" id = "btnSetDoorPosDefault">Set Default</button></td>
+          </tr>
+        </table>
+      </div>
+      
+      <div id="FrameAxisMiscControl" class = "GrpFrame">
+        <h1>Misc Controls</h1>
+        <table>
+          <tr>
+            <td>Lift Brake</td>
+            <td><button class="btn_axis_control" id="btn_elvtbrakeon"> Brake</button></td>
+            <td><button class="btn_axis_control" id="btn_elvtbrakeoff"> Release</button></td>
+          </tr>
+          <tr>
+            <td>Door Controls</td>
+            <td><button class="btn_axis_control" id = "btnDoorOpen" >Unlock</button></td>
+            <td><button class="btn_axis_control" id = "btnDoorClose" >Lock+Hold</button></td>
+          </tr>
+          <tr>
+            <td rowspan="2">Ind. Axis Functions</td>
+            <td>
+              <select class="select_axiscontrol" id="Command_AxisMoveList">
+                <option value="2">Conveyor</option>
+                <option value="3">Kicker</option>
+                <option value="4">Pusher</option>
+                <option value="5">Clamper</option>
+              </select>
+            </td>
+            <td rowspan ="2"><button class="btn_axis_control"  id="btnMoveAxis">Move</button></td>
+          </tr>
+          <tr>
+            <td><select class="select_axiscontrol" id="Command_AxisMoveLevel" ></select></td>
+          </tr>
+          <tr><td colspan = "3"><hr></hr></td></tr>
+          <tr>
+            <td colspan = "2">Overall Reference Run</td>
+            <td><button class="btn_axis_control" id="btnRefRun" >Reference</button></td>
+          </tr>
+          <tr>
+              <td>Ind. Axis Reference Run</td>
               <td><select class="select_axiscontrol" id="Command_AxisRefRunList" >
               <option value="1">Lift</option>              
               <option value="2">Conveyor</option>
@@ -243,12 +241,11 @@
               <option value="5">Clamper</option>
             </select></td>
             <td><button class="btn_axis_control"  id="btnIndividualRefRun" >Reference</button></td>
-          </tr>
-          </table>
-        </div>
-      </div>
+          </tr>          
+        </table>     
+      </div>  
+      
     </div>
-    
     <!-- --------------------------------------------------------------------->
     <!-- Frame IO Control -->
     <!-- --------------------------------------------------------------------->
@@ -299,7 +296,7 @@
             <tr><td colspan = "3"><hr></td></tr>
             <tr>
               <td rowspan = "2"><h1>Single Axis Func.</h1></td>
-              <td><select class="select_axiscontrol" id="Command_AxisMoveList2" style = "width:150px">
+              <td><select class="select_iocontrol" id="Command_AxisMoveList2">
                   <option value="2">Conveyor</option>
                   <option value="3">Kicker</option>
                   <option value="4">Pusher</option>
@@ -307,11 +304,11 @@
                     </select></td>
               <td rowspan = "2"><button class="btn_axis_control"  id="btnMoveAxis2" style="width:150px;height:50px">Move</button></td>
             </tr>
-            <tr><td><select class="select_axiscontrol" id="Command_AxisMoveLevel2" style = "width:150px"> </select></td></tr>
+            <tr><td><select class="select_iocontrol" id="Command_AxisMoveLevel2"> </select></td></tr>
             <tr><td colspan = "3"><hr></td></tr>
             <tr>
               <td><h1>Single Axis Reference Run</h1></td>
-              <td><select class="select_axiscontrol" id="Command_AxisRefRunList2" style = "width:150px">
+              <td><select class="select_iocontrol" id="Command_AxisRefRunList2" >
               <option value="1">Lift</option>
               <option value="2">Conveyor</option>
               <option value="3">Kicker</option>

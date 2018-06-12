@@ -106,7 +106,7 @@ Function OnClick_btnGetRefInfo ( Reason )
 
   Memory.CANData(0) = $(JTF_DBG_LIFTPOS)
   If CANSendTACMD($(CMD_GET_DATA),$(MC_TEST_PRODUCTION),SLOT_NO,1,1) = True Then
-    Visual.Select("ref_poslift").Value = String.Format("0x%08X", Lang.MakeLong4(CANData.Data(2),CANData.Data(3),CANData.Data(4),CANData.Data(5)))
+    Visual.Select("refpos_lift").Value = String.Format("0x%08X", Lang.MakeLong4(CANData.Data(2),CANData.Data(3),CANData.Data(4),CANData.Data(5)))
   End If
   
 End Function 

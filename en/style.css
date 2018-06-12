@@ -72,12 +72,13 @@ table { border-collapse: collapse;    }
 
 .select_command {width:100px;margin:5px 0px;height:50px;line-height:50px;background:white;}
 .select_endurance{width: 180px;}
-.select_axiscontrol {width:100px;margin:5px 0px;height:40px;line-height:50px;}
+.select_axiscontrol {width:120px;margin:2px;height:40px;}
+.select_iocontrol {width:150px;margin:5px 0px;height:40px;line-height:50px;}
 
 .btn_debug  { width:50px}
 .btn_command_info   { padding: 1px; height: 50px;}
 .btn_command { width:150px;height:50px;}
-.btn_axis_control { width:120px;height:50px;margin:0px 3px;}
+.btn_axis_control { width:120px;height:50px;margin:2px;}
 .btn_encoderset { padding:0px;height:20px;width:50px;}
 .btn_endurance { height:22px; width: 100px;padding:1px;}
 
@@ -115,13 +116,10 @@ table { border-collapse: collapse;    }
 }
 
 /*From Axis Control*/
-#Frame_AxisControl {height:100%;width:100%;  Background-color: #97A0A5;}
-  #FrameAxisInfomation {width:100%; padding:5px;}
-    #InnerFrameAxisRefInfo     {float:left;}
-    #InnerFrameAxisMiscControl {float:left;padding-left:100px}
-#FrameAxisElevOffsetCtrl {width:100%; padding:5px;}
-  #InnerFrameAxisIndividual {float:left;clear:left;}
-  #InnerFrameOffSetCtrl     {float:left;}
+#Frame_AxisControl {height:100%;width:100%;Background-color: #97A0A5;}
+  #FrameAxisInfomation      {float:left;width:56%;height:220px}
+  #FrameAxisElevOffsetCtrl  {float:left;width:56%;clear:left;}
+  #FrameAxisMiscControl     {float:left;width:43%;height:421px}
 /* From IO */
 #Frame_IOs { height:100%;width:100%;  Background-color: #97A0A5;}
   #Frame_Sensors { float:left;}
