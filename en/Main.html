@@ -47,7 +47,6 @@
           <td><button id = "btnGetApp" class = "btn_command_info">Read Info</button></td>
           <td><button id = "btnReset" class = "btn_command_info">Reset</button></td>
           <td><button id="btnclrusrerr" class = "btn_command_info">Clear Err</button></td>
-
           </table>
         </div>
         
@@ -68,30 +67,23 @@
         <div id = "FrameFeederID" class = "GrpInnerFrame" style = "width:200px">
           <span class = "FontCommon" style = "width : 70px">Feeder ID  </span><input id="inputFeederID" class ="InputasDisplay" readonly></input>
         </div>
-       
-        <div id="FrameInfoButtons">
-          <table>
-            <tr>
-
-            </tr>
-          </table>
-        </div>
       </div>
+      
       <div id = "Frame_CommandGeneral" class = "GrpFrame ">
         <h1>Commands</h1>
         <table>
-        <tr style = "height:50px;margin:5px 0px;">
-        <td>   </td>
+        <tr>
+        <td></td>
         <td><button id = "btnRefRun" class ="btn_command">Reference Run</button></td>         
         </tr>
-        <tr style = "height:50px;margin:5px 0px;">
+        <tr>
           <td><select class="select_command" id = "optSelectTray" ></select></td>
           <td><button id = "btnCmdPrepareTray" class ="btn_command">Prepare Tray</button></td>
           <td><button id = "btnCmdReturnTray" class ="btn_command">Unload Tray</button></td>
           <td>X-Acc<input id="input_xacc"></input></td>
           <td>Z-Acc<input id="input_zacc"></input></td>
         </tr>
-        <tr style = "height:50px;margin:5px 0px;">
+        <tr>
           <td>
             <select class="select_command" id = "optRefillCassette" >
               <option value = "0x02">Top</option>
@@ -101,20 +93,18 @@
           <td><button id = "btnRefillStart" class ="btn_command">Refill Start</button></td>
           <td><button id = "btnRefillStop" class ="btn_command">Refill Stop</button></td>
         </tr>
-        <tr style = "height:50px;margin:5px 0px;">
+        <tr>
           <td><select class="select_command" id = "optMoveLevel"></select></td>
           <td><button tooltip = "Moves to cassette level" id = "btnMoveLevel" class ="btn_command">Move to Level</button></td>
-          <td><button tooltip = "Moves to Transport Position" id = "btnMoveTransport" class ="btn_command">Transport Pos</button></td>
-          
+          <td><button tooltip = "Moves to Transport Position" id = "btnMoveTransport" class ="btn_command">Transport Pos</button></td>          
         </tr>
-        <tr style = "height:50px;margin:5px 0px;">
+        <tr>
           <td></td>
           <td><button id = "btnDoorOpen" class ="btn_command">Door Unlock</button></td>
           <td><button id = "btnDoorClose" class ="btn_command">Door Lock</button></td>
           <td><img id="DoorSwitchLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Door Closed</b></img></td>        
           <td><img id="DoorLockLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Door Locked</b></img></td>
-        </tr>
-      
+        </tr>      
         </table>
       </div>
     </div>
@@ -212,7 +202,7 @@
             <td><button class="btn_axis_control" id = "btnDoorClose" >Lock+Hold</button></td>
           </tr>
           <tr>
-            <td rowspan="2">Ind. Axis Functions</td>
+            <td rowspan="2">Single Axis Function</td>
             <td>
               <select class="select_axiscontrol" id="Command_AxisMoveList">
                 <option value="2">Conveyor</option>
@@ -232,13 +222,13 @@
             <td><button class="btn_axis_control" id="btnRefRun" >Reference</button></td>
           </tr>
           <tr>
-              <td>Ind. Axis Reference Run</td>
-              <td><select class="select_axiscontrol" id="Command_AxisRefRunList" >
-              <option value="1">Lift</option>              
-              <option value="2">Conveyor</option>
-              <option value="3">Kicker</option>
-              <option value="4">Pusher</option>
-              <option value="5">Clamper</option>
+            <td>Single Axis Reference Run</td>
+            <td><select class="select_axiscontrol" id="Command_AxisRefRunList" >
+            <option value="1">Lift</option>              
+            <option value="2">Conveyor</option>
+            <option value="3">Kicker</option>
+            <option value="4">Pusher</option>
+            <option value="5">Clamper</option>
             </select></td>
             <td><button class="btn_axis_control"  id="btnIndividualRefRun" >Reference</button></td>
           </tr>          
@@ -252,62 +242,56 @@
     <div id = "Frame_IOs">
       <div id = "Frame_Sensors" class="GrpFrame">
         <div id = "InnerFrame_Sensors">
-          <table id="Sensors" class = "tablebckgnd">
+          <table>
             <tr><td><h1>Sensors</h1></td></tr>      
             <tr><td><img id="DoorSwitchLed2" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Door Closed</b></img></td></tr>
             <tr><td><img id="SafetyLoopLED" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Safety Loop Closed</b></img></td></tr>
             <tr><td><img id="MtrPowerOff" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Motor Power On</b></img></td></tr>
             <tr><td><img id="DoorLockLed2" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Door Lock On</b></img></td></tr>
-
-            <tr><td></td></tr>
-            
             <tr><td><img id="KickerHmLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Kicker Home</b></img></td></tr>
-            <tr><td><img id="ClamperHmLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Clamper Home Sensor</b></img></td>      </tr>
+            <tr><td><img id="ClamperHmLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Clamper Home Sensor</b></img></td></tr>
             <tr><td><img id="PusherHmLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Pusher Home Sensor</b></img></td></tr>
             <tr><td><img id="TrayLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Tray Present Sensor</b></img></td></tr>
             <tr><td><img id="BottomLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Lift Bottom Limit Sensor</b></img></td></tr>
             <tr><td><img id="LiftBrakeLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Lift Axis Brake On</b></img></td></tr>
-
-            <tr><td></td></tr>
-            
             <tr><td><img id="GapLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Gap Sensor</b></img></td></tr>
             <tr><td><img id="RwSdLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Reverse SlowDown Sensor</b></img></td></tr>
             <tr><td><img id="FwSdLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Foward SlowDown Sensor</b></img><td></tr>
-          </table>
-          
-          <button id="btnReadIO"  style = "width:150px;height:50px">Start IO Polling</button>
-          <button id = "btnRefRun"  style = "width:150px;height:50px;">Reference Run</button>
+          </table>          
+          <button id="btnReadIO" class="btn_large">Start IO Polling</button>
         </div>
         
         <div id= "InnerFrame_IOButtons">
-          <div>
+          <h1>Misc Controls</h1>
           <table>
             <tr>
-              <td style = "width:200px"><h1>Lift Brake</h1></td>
-              <td><button class="btn_axis_control" id="btn_elvtbrakeon" style = "width:150px;height:50px"> Brake</button></td>
-              <td><button class="btn_axis_control" id="btn_elvtbrakeoff" style = "width:150px;height:50px"> Release</button></td>
-            </tr>
-            <tr><td colspan = "3"><hr></td></tr>
+              <td>Lift Brake</td>
+              <td><button class="btn_large" id="btn_elvtbrakeon"> Brake</button></td>
+              <td><button class="btn_large" id="btn_elvtbrakeoff"> Release</button></td>
+            </tr>            
             <tr>
-              <td><h1>Door Controls</h1></td>
-              <td><button class="btn_axis_control" id = "btnDoorOpen" style = "width:150px;height:50px">Unlock</button></td>
-              <td><button class="btn_axis_control" id = "btnDoorClose"  style = "width:150px;height:50px">Lock+Hold</button></td>
+              <td>Door Controls</td>
+              <td><button class="btn_large" id = "btnDoorOpen">Unlock</button></td>
+              <td><button class="btn_large" id = "btnDoorClose">Lock+Hold</button></td>
             </tr>
-            <tr><td colspan = "3"><hr></td></tr>
             <tr>
-              <td rowspan = "2"><h1>Single Axis Func.</h1></td>
+              <td rowspan = "2">Single Axis Function</td>
               <td><select class="select_iocontrol" id="Command_AxisMoveList2">
                   <option value="2">Conveyor</option>
                   <option value="3">Kicker</option>
                   <option value="4">Pusher</option>
                   <option value="5">Clamper</option>
                     </select></td>
-              <td rowspan = "2"><button class="btn_axis_control"  id="btnMoveAxis2" style="width:150px;height:50px">Move</button></td>
+              <td rowspan = "2"><button class="btn_large"  id="btnMoveAxis2">Move</button></td>
             </tr>
             <tr><td><select class="select_iocontrol" id="Command_AxisMoveLevel2"> </select></td></tr>
             <tr><td colspan = "3"><hr></td></tr>
             <tr>
-              <td><h1>Single Axis Reference Run</h1></td>
+              <td colspan = "2">Overall Reference Run</td>
+              <td><button class="btn_axis_control" id="btnRefRun" >Reference</button></td>
+            </tr>
+            <tr>
+              <td>Single Axis Reference Run</td>
               <td><select class="select_iocontrol" id="Command_AxisRefRunList2" >
               <option value="1">Lift</option>
               <option value="2">Conveyor</option>
@@ -315,10 +299,9 @@
               <option value="4">Pusher</option>
               <option value="5">Clamper</option>
             </select></td>
-              <td><button class="btn_axis_control"  id="btnIndividualRefRun2" style="width:150px;height:50px">Reference</button></td>
+              <td><button class="btn_large"  id="btnIndividualRefRun2">Reference</button></td>
             </tr>
           </table>
-          </div>
         </div>        
       </div>
       <!-- HIdden frame to store unused IO displays -->
@@ -338,8 +321,7 @@
             <span class="FontCommon"> Check the boxes below for the trays levels to be used for endurance run </span>
             <table id="table_trayselect">
             <tr>
-              <td></td>
-              <td></td>
+              <td colspan = "2"></td>
               <td style = "width:20px;">1</td>
               <td style = "width:20px;">2</td>
               <td style = "width:20px;">3</td>
