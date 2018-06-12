@@ -15,7 +15,7 @@ table { border-collapse: collapse;    }
 .LedImgStyle{		display: inline-block;border:0px solid #ddd;border-radius: 1px;padding: 5px 16px;margin-left: 10px;}
 .InputasDisplay
 {  
-  font-size:12px;  
+  font-size:12px;
   font-weight:bold;  
   color:black;
   background-color: white;  
@@ -77,7 +77,7 @@ table { border-collapse: collapse;    }
 .btn_debug  { width:50px}
 .btn_command_info   { padding: 1px; height: 50px;}
 .btn_command { width:150px;height:50px;}
-.btn_axis_control { width:120px;height:40px; }
+.btn_axis_control { width:120px;height:50px;margin:0px 3px;}
 .btn_encoderset { padding:0px;height:20px;width:50px;}
 .btn_endurance { height:22px; width: 100px;padding:1px;}
 
@@ -93,8 +93,6 @@ table { border-collapse: collapse;    }
 
 /*From commands*/
 #Frame_Commands { height:100%;width:100%;  Background-color: #97A0A5;}
-#Frame_AxisControl { height:100%;width:100%;  Background-color: #97A0A5;}
-#Frame_IOs { height:100%;width:100%;  Background-color: #97A0A5;}
 #Frame_Endurance { height:100%;width:100%;  Background-color: #97A0A5;}
 #Frame_Debug { height:100%;width:100%;  Background-color: #97A0A5;}
 #Frame_CommandGeneral { clear:left;width:100%;}
@@ -117,25 +115,19 @@ table { border-collapse: collapse;    }
 }
 
 /*From Axis Control*/
-
-#Layer_AxisControl 
-{
-overflow :scroll;
-padding:5px; 
-width: 100%; 
-height: 100%; 
-}
-#FrameAxisInfomation { width:100%; padding:5px;}
-#FrameAxisRefInfo { float:left; width:33%}
-#FrameAxisMiscControl {float:right;width:400px;}
+#Frame_AxisControl {height:100%;width:100%;  Background-color: #97A0A5;}
+  #FrameAxisInfomation {width:100%; padding:5px;}
+    #InnerFrameAxisRefInfo     {float:left;}
+    #InnerFrameAxisMiscControl {float:left;padding-left:100px}
 #FrameAxisElevOffsetCtrl {width:100%; padding:5px;}
-#FrameAxisIndividual {float:right;width:33%}
-#FrameReferencePositions  {float:left;width:33%}
+  #InnerFrameAxisIndividual {float:left;clear:left;}
+  #InnerFrameOffSetCtrl     {float:left;}
 /* From IO */
-#Sensors {border-collapse: collapse; table-layout: fixed; height: auto; width = 50%;}
-#Frame_Sensors { float:left;}
-#InnerFrame_IOButtons { clear:left;float:right;padding:10px;}
-#InnerFrame_Sensors { float:left;}
+#Frame_IOs { height:100%;width:100%;  Background-color: #97A0A5;}
+  #Frame_Sensors { float:left;}
+    #InnerFrame_Sensors { float:left;}
+      #Sensors {border-collapse: collapse; table-layout: fixed; height: auto; width = 50%;}
+    #InnerFrame_IOButtons { clear:left;float:right;padding:10px;}
 
 /* From Endurance */
 

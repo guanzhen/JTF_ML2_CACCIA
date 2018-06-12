@@ -32,8 +32,7 @@ function load_tabbar()
   }
 
   tabbar.hideTab("main_tab5");
-  tabbar.setTabActive("main_tab1");
-  tabbar.forceLoad("main_tab1");
+  tabbar.setTabActive("main_tab2");
 };
 
 function load_messagebox()

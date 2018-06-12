@@ -17,7 +17,7 @@
 	  <link rel="stylesheet" type="text/css" href="../../../codebase/grid/skins/dhtmlxgrid_dhx_skyblue.css">
 	  <link rel="stylesheet" type="text/css" href="../../../codebase/grid/dhtmlxgrid.css">
 	  <script src="../../../codebase/grid/dhtmlxgrid.js"></script>    
-  <script src="../../../codebase/grid/ext/dhtmlxgrid_srnd.js" type="text/javascript"></script>
+    <script src="../../../codebase/grid/ext/dhtmlxgrid_srnd.js" type="text/javascript"></script>
 	  <script src="../../../codebase/grid/dhtmlxgridcell.js"></script>
 	  <script src="../../../codebase/grid/ext/dhtmlxgrid_data.js"></script>
 
@@ -123,9 +123,8 @@
     <!-- --------------------------------------------------------------------->    
     <div id = "Frame_AxisControl">
       <div id= "FrameAxisInfomation" class= "GrpFrame">
-        <div id= "FrameAxisRefInfo" >
+        <div id= "InnerFrameAxisRefInfo">
           <h1>Reference Information </h1>
-          <div id="InnerFrame_RefDisplay">
           <table>
             <tr>
               <td>OverAll</td>
@@ -156,38 +155,21 @@
               <td><button class="btn_axis_control" id="btnGetRefInfo" >Get Ref Info</button></td>
             </tr>    
           </table>
-          </div>
         </div>
         
-        <div id="FrameReferencePositions">
-          <h1>Level set points</h1>
-          <table>
+        <div id="InnerFrameAxisMiscControl">        
+          <table>            
+            <tr><td><h1>Lift Set Point</td><td><input id="refpos_lift" class="InputasDisplay" readonly></td></tr>
+            <tr><td><h1>Door Set Point</td><td><input id="refpos_door" class="InputasDisplay" readonly></td>            </tr>
+            <tr><td><h1>Conveyor Tray </h1></td><td><input id="inputTrayConveyor" class="InputasDisplay" readonly></td></tr>
+            <tr><td colspan = "3"><hr></td></tr>
             <tr>
-              <td>Lift</td>
-              <td><input id="refpos_lift" class="InputasDisplay" readonly></td>          
-            </tr>
-            <tr>
-              <td style = "width:100px">Door</td>
-              <td><input id="refpos_door" class="InputasDisplay" readonly></td>          
-            </tr>
-          </table>
-        </div>
-        
-        <div id="FrameAxisMiscControl">
-          <table>
-            <tr>
-              <td><h1> Conveyor Tray </h1></td>
-              <td><input id="inputTrayConveyor" class="InputasDisplay" readonly></td>
-            </tr>
-            <tr><td colspan = "2"><hr></td></tr>
-            <tr><td colspan = "2" ><h1>Lift Brake</h1></td></tr>
-            <tr>
+              <td><h1>Lift Brake</h1></td>
               <td><button class="btn_axis_control" id="btn_elvtbrakeon"> Brake</button></td>
               <td><button class="btn_axis_control" id="btn_elvtbrakeoff"> Release</button></td>
             </tr>
-            <tr><td colspan = "2"><hr></td></tr>
-            <tr><td colspan = "2"><h1>Door Controls</h1></td></tr>
             <tr>
+              <td><h1>Door Controls</h1></td>
               <td><button class="btn_axis_control" id = "btnDoorOpen" >Unlock</button></td>
               <td><button class="btn_axis_control" id = "btnDoorClose" >Lock+Hold</button></td>
             </tr>              
@@ -196,19 +178,20 @@
       </div>
       
       <div id = "FrameAxisElevOffsetCtrl" class = "GrpFrame">
-        <div id = "SubFrameOffSetCtrl">
-          <div style = "float:left;margin-top:10px;margin-left:5px" >
+        <div id = "InnerFrameOffSetCtrl">
             <h1>Lift Offset Control</h1>
-            <span>1. Move Lift to position to set.</span><br>
-            <span>2. Make adjustments using '+' and '-' buttons.</span><br>
-            <span>3. Click on 'Set New Pos' to save the position.</span><br>
+            <!--
+                <span>1. Move Lift to position to set.</span><br>
+                <span>2. Make adjustments using '+' and '-' buttons.</span><br>
+                <span>3. Click on 'Set New Pos' to save the position.</span><br> 
+                -->
             <table>
               <tr class = "seperator">
                 <td><button class="btn_axis_control" id = "btnPositive"   style = "width=75px;">+</button>
                 <td>Tray Index Position</td>
-                <td><button class="btn_axis_control" id = "btnMovetoMidIndexPos"  style="margin:0px 5px">Move to Pos</button></td>
-                <td><button class="btn_axis_control" id = "btnSetMidIndexPos"  style="margin:0px 5px">Set New Pos</button></td>
-                <td><button class="btn_axis_control" id = "btnSetMidIndexPosDefault"  style="margin:0px 5px">Set Default</button></td>
+                <td><button class="btn_axis_control" id = "btnMovetoMidIndexPos">Move to Pos</button></td>
+                <td><button class="btn_axis_control" id = "btnSetMidIndexPos">Set New Pos</button></td>
+                <td><button class="btn_axis_control" id = "btnSetMidIndexPosDefault">Set Default</button></td>
               </tr>
               <tr>
                 <td>
@@ -217,7 +200,7 @@
                   <option value = "100">0.1mm</option>
                   <option value = "500">0.5mm</option>
                   <option value = "1000">1mm</option>
-                  <option value = "5000">5mm</option>
+                  <option value = "5000">5mm</option>                  
                   <option value = "10000">10mm</option>
                   </select>
                 </td>
@@ -226,36 +209,40 @@
               <tr>
                 <td><button class="btn_axis_control" id = "btnNegative"   style = "width=75px;">-</button>      
                 <td>Door Position</td>
-                <td><button class="btn_axis_control" id = "btnMovetoDoorPos"  style="margin:0px 5px">Move to Pos</button></td>
-                <td><button class="btn_axis_control" id = "btnSetDoorPos"  style="margin:0px 5px">Set New Pos</button></td>
-                <td><button class="btn_axis_control" id = "btnSetDoorPosDefault"  style="margin:0px 5px">Set Default</button></td>
+                <td><button class="btn_axis_control" id = "btnMovetoDoorPos">Move to Pos</button></td>
+                <td><button class="btn_axis_control" id = "btnSetDoorPos">Set New Pos</button></td>
+                <td><button class="btn_axis_control" id = "btnSetDoorPosDefault">Set Default</button></td>
               </tr>
             </table>
-          </div>
         </div>     
       
-        <div id = "FrameAxisIndividual">
-          <table>
-          <tr><td colspan = "3"> <h1>Individual Axis Functions</h1></td></tr>
-          <tr><td><select class="select_axiscontrol" id="Command_AxisMoveList" >
+        <div id = "InnerFrameAxisIndividual">
+        <table>
+          <tr>
+            <td rowspan = "2"><h1>Ind. Axis Functions</h1></td>
+            <tr><td><select class="select_axiscontrol" id="Command_AxisMoveList" >
               <option value="2">Conveyor</option>
               <option value="3">Kicker</option>
               <option value="4">Pusher</option>
               <option value="5">Clamper</option>
             </select></td>
+            <td rowspan = "2"><button class="btn_axis_control"  id="btnMoveAxis">Move</button></td>
+          </tr>
+          <tr>
+            <td>
             <td><select class="select_axiscontrol" id="Command_AxisMoveLevel" ></select></td>
-            <td><button class="btn_axis_control"  id="btnMoveAxis" style="">Move</button></td>
-            </tr>
-          <tr><td colspan = "3"><hr></td></tr>
-          <tr><td colspan = "3"><h1>Individual Axis Reference Run</h1></td></tr>
-          <tr><td colspan = "2"><select class="select_axiscontrol" id="Command_AxisRefRunList" >
-              <option value="1">Lift</option>
+            <td>
+          </tr>          
+          <tr>
+              <td><h1>Ind. Axis Reference Run</h1></td>
+              <td><select class="select_axiscontrol" id="Command_AxisRefRunList" >
+              <option value="1">Lift</option>              
               <option value="2">Conveyor</option>
               <option value="3">Kicker</option>
               <option value="4">Pusher</option>
               <option value="5">Clamper</option>
             </select></td>
-            <td><button class="btn_axis_control"  id="btnIndividualRefRun" style="">Reference</button></td>
+            <td><button class="btn_axis_control"  id="btnIndividualRefRun" >Reference</button></td>
           </tr>
           </table>
         </div>
