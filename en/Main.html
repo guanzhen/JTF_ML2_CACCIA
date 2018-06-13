@@ -43,10 +43,10 @@
           <table>
           <td><span style = "color = white;font-size = 10pt;font-family=arial;margin=0px;">0x</span></td>
           <td><input id = "inputCANID" ></input></td>
-          <td><button id = "btnAssignCANID" class = "btn_command_info">Assign CANID</button></td>
-          <td><button id = "btnGetApp" class = "btn_command_info">Read Info</button></td>
-          <td><button id = "btnReset" class = "btn_command_info">Reset</button></td>
-          <td><button id="btnclrusrerr" class = "btn_command_info">Clear Err</button></td>
+          <td><button id = "btnAssignCANID" class = "btn_large">Assign CANID</button></td>
+          <td><button id = "btnGetApp" class = "btn_large">Read Info</button></td>
+          <td><button id = "btnReset" class = "btn_large">Reset</button></td>
+          <td><button id="btnclrusrerr" class = "btn_large">Clear Err</button></td>
           </table>
         </div>
         
@@ -74,14 +74,16 @@
         <table>
         <tr>
         <td></td>
-        <td><button id = "btnRefRun" class ="btn_command">Reference Run</button></td>         
+        <td><button id = "btnRefRun" class ="btn_large">Reference Run</button></td>         
         </tr>
         <tr>
-          <td><select class="select_command" id = "optSelectTray" ></select></td>
-          <td><button id = "btnCmdPrepareTray" class ="btn_command">Prepare Tray</button></td>
-          <td><button id = "btnCmdReturnTray" class ="btn_command">Unload Tray</button></td>
-          <td>X-Acc<input id="input_xacc"></input></td>
-          <td>Z-Acc<input id="input_zacc"></input></td>
+          <td rowspan="2"><select class="select_command" id = "optSelectTray" ></select></td>
+          <td rowspan="2"><button id = "btnCmdPrepareTray" class ="btn_large">Prepare Tray</button></td>
+          <td rowspan="2"><button id = "btnCmdReturnTray" class ="btn_large">Unload Tray</button></td>
+          <td><input id="input_xacc" ></input> X-Acc</td>
+        </tr>
+        <tr>
+          <td><input id="input_zacc"></input> Z-Acc</td>
         </tr>
         <tr>
           <td>
@@ -90,21 +92,23 @@
               <option value = "0x01">Bottom</option>
             </select>
           </td>
-          <td><button id = "btnRefillStart" class ="btn_command">Refill Start</button></td>
-          <td><button id = "btnRefillStop" class ="btn_command">Refill Stop</button></td>
+          <td><button id = "btnRefillStart" class ="btn_large">Refill Start</button></td>
+          <td><button id = "btnRefillStop" class ="btn_large">Refill Stop</button></td>
         </tr>
         <tr>
           <td><select class="select_command" id = "optMoveLevel"></select></td>
-          <td><button tooltip = "Moves to cassette level" id = "btnMoveLevel" class ="btn_command">Move to Level</button></td>
-          <td><button tooltip = "Moves to Transport Position" id = "btnMoveTransport" class ="btn_command">Transport Pos</button></td>          
+          <td><button tooltip = "Moves to cassette level" id = "btnMoveLevel" class ="btn_large">Move to Level</button></td>
+          <td><button tooltip = "Moves to Transport Position" id = "btnMoveTransport" class ="btn_large">Transport Pos</button></td>          
         </tr>
         <tr>
-          <td></td>
-          <td><button id = "btnDoorOpen" class ="btn_command">Door Unlock</button></td>
-          <td><button id = "btnDoorClose" class ="btn_command">Door Lock</button></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"><button id = "btnDoorOpen" class ="btn_large">Door Unlock</button></td>
+          <td rowspan="2"><button id = "btnDoorClose" class ="btn_large">Door Lock</button></td>
           <td><img id="DoorSwitchLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Door Closed</b></img></td>        
-          <td><img id="DoorLockLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Door Locked</b></img></td>
         </tr>      
+        <tr>
+          <td><img id="DoorLockLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Door Locked</b></img></td>
+        </tr>
         </table>
       </div>
     </div>
@@ -158,7 +162,7 @@
             <span>3. Click on 'Set New Pos' to save the position.</span><br> 
             -->
         <table>
-          <tr class = "seperator">
+          <tr>
             <td><button class="btn_axis_control" id = "btnPositive"   style = "width=100px;">+</button>
             <td>Tray Index Position</td>
             <td><button class="btn_axis_control" id = "btnMovetoMidIndexPos">Move to Pos</button></td>
@@ -420,12 +424,12 @@
       <div id = "Frame_miscfunctions" class="GrpFrame">
         <table>
         <tr><td>LED Error Status</td>
-        <td><button class = "btn_debug" id="debug_getLED">Get</button></td>
+        <td><button id="debug_getLED">Get</button></td>
         <td><input id = "debug_LEDstatus"></input></td>
         </tr>
         <tr>
         <td>Reset Runtime Flash</td>
-        <td><button class = "btn_debug" id="debug_ResetFlashErrorCnt">Reset</button></td>
+        <td><button  id="debug_ResetFlashErrorCnt">Reset</button></td>
         </tr>
         </table>
       </div>
@@ -444,7 +448,7 @@
           </table>
         </div>
         <div style = "float:left; clear:left;">
-          <button class = "btn_debug" id="btnReadEnc"  style = "margin-top:10px;width:130px;height:30px">Read Encoder Value</button>
+          <button  id="btnReadEnc"  style = "margin-top:10px;width:130px;height:30px">Read Encoder Value</button>
         </div>
         <div id="subframe_encoderpos" class = "GrpInnerFrame">
           <h1>Encoder Positions</h1>
@@ -453,38 +457,39 @@
             <tr style = "font-weight:bold;"><td>Position</td><td>Current</td><td >New Value</td></tr>
             <tr>
               <td>Kicker Out</td>
-              <td><input  class = "InputasDisplay" id = "input_kikroutcurrPos"></input></td>
+              <td><input class = "InputasDisplay" id = "input_kikroutcurrPos"></input></td>
               <td><input class = "InputasDisplay" id = "input_KickerOutPos"></input></td>
-              <td><button class = "btn_debug" id = "btnencoderset0" class ="btn_encoderset">Set</button></td>
+              <td><button id = "btnencoderset0">Set</button></td>
             </tr>
             <tr>
               <td>Pusher Pickup</td>
               <td><input class = "InputasDisplay" id = "input_pusherpickupcurrPos"></input></td>
               <td><input class = "InputasDisplay" id = "input_pusherpickupPos"></input></td>
-              <td><button class = "btn_debug" id = "btnencoderset1" class ="btn_encoderset">Set</button></td>
+              <td><button  id = "btnencoderset1">Set</button></td>
             </tr>
             <tr>
               <td>Pusher Tray In</td>
               <td><input class = "InputasDisplay" id = "input_pshrtrayincurrPos"></input></td>
               <td><input class = "InputasDisplay" id = "input_pshrtrayinPos"></input></td>
-              <td><button class = "btn_debug" id = "btnencoderset2" class ="btn_encoderset">Set</button></td>
+              <td><button id = "btnencoderset2">Set</button></td>
             </tr>
             <tr><td>Pusher Tray Touch</td>
               <td><input class = "InputasDisplay"  id = "input_pshrtraytouchcurrPos"></input></td>
               <td><input class = "InputasDisplay" id = "input_pshrtraytouchPos"></input></td>
-              <td><button class = "btn_debug" id = "btnencoderset3" class ="btn_encoderset">Set</button></td>
+              <td><button id = "btnencoderset3">Set</button></td>
             </tr>
             <tr>
               <td>Clamper Standby</td>
               <td><input class = "InputasDisplay" id = "input_clprstandbycurrPos"></input></td>
               <td><input class = "InputasDisplay" id = "input_clprstandbyPos"></input></td>
-              <td><button class = "btn_debug" id = "btnencoderset4" class ="btn_encoderset">Set</button></td>
+              <td><button id = "btnencoderset4">Set</button></td>
             </tr>
+
             <tr>
               <td>Clamper Clamping</td>
               <td><input class = "InputasDisplay" id = "input_clprclampcurrPos"></input></td>
               <td><input class = "InputasDisplay" id = "input_clprclampPos"></input></td>
-              <td><button class = "btn_debug" id = "btnencoderset5" class ="btn_encoderset">Set</button></td>
+              <td><button id = "btnencoderset5">Set</button></td>
               </tr>
           </table>
           <div>
@@ -493,7 +498,7 @@
             </input>            
           </div>
           <div style = "float:left">
-            <button class = "btn_debug" id="btnReadEncPos"  style = "margin-top:10px;width:130px;height:30px">Read Defined Pos</button>
+            <button id="btnReadEncPos"  style = "margin-top:10px;width:130px;height:30px">Read Defined Pos</button>
           </div>
         </div>
       </div>
