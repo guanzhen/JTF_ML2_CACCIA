@@ -16,7 +16,7 @@ function load_tabbar()
   tabbar.setContent( "main_tab1", Frame_Commands);
   tabbar.setContent( "main_tab2", Frame_AxisControl);
   tabbar.setContent( "main_tab3", Frame_IOs);
-  tabbar.setContent( "main_tab4", Frame_Endurance);
+  tabbar.setContent( "main_tab4", Frame_EnduranceTest);
   tabbar.setContent( "main_tab5", Frame_Debug);
   
   tabbar.enableAutoReSize( true );
@@ -32,7 +32,7 @@ function load_tabbar()
   }
 
   //tabbar.hideTab("main_tab5");
-  tabbar.setTabActive("main_tab1");
+  tabbar.setTabActive("main_tab5");
 };
 
 function load_messagebox()
@@ -88,7 +88,7 @@ dhtmlxEvent(window,"load",function()
   load_messagebox();
   load_tabbar();
   load_CANsetup();
-  Layer_TabStrip.style.display = "none";
+  //Layer_TabStrip.style.display = "none";
   Layer_MessageLog.style.display = "none";
   //Frame_Commands.style.display = "none";
   //Frame_AxisControl.style.display = "none";

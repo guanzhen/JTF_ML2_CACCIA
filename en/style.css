@@ -3,7 +3,7 @@
 body { margin:0px;}
 html { background-color : #97A0A5;}
 td { font-family:arial;color:white;}
-h1  { font-size: 12pt; color:white; margin:3px 0px 7px 3px; font-family:arial }
+h1  { font-size: 12pt; color:white; margin:3px 0px 3px 3px; font-family:arial }
 h2 { font-size: 12pt;color:white; margin:3px 0px 7px 1x; font-family:arial}
 button     { font-size: 12px;   padding: 5px 5px;   width:100px;      margin: 2px;      text-align: center;    }
 span { font-family: arial;   font-size:10pt;  color: white;    }
@@ -13,17 +13,18 @@ table { border-collapse: collapse;    }
 .FontCommon{  font-size:10pt;  color:white;  font-family:arial;}
 .LedImgStyle{		display: inline-block;border:0px solid #ddd;border-radius: 1px;padding: 5px 16px;margin-left: 10px;}
 .InputasDisplay
-{  
+{
   font-size:12px;
   font-weight:bold;  
   color:black;
   background-color: white;  
   height:18px;  
-  width:110px;	
+  width:120px;	
   text-align:center; 
   border-style  :solid;  
   border-width  :1px;
  }
+ 
 .GrpFrame
 {
   border-color:     white;
@@ -34,50 +35,30 @@ table { border-collapse: collapse;    }
   padding:          3px;
 }
 
-.GrpInnerFrame    {      width:49%;       float: left;      margin:0px 1px 0px 1px;    }
-
-.InnerFrame_Endurance
-{
-  border-style:solid;
-  border-color:white;
-  border-width:1px;
-  padding:5px;
-  margin:2px;
-  float:left;
-}
-
 .select_command {width:100px;margin:5px 0px;height:50px;line-height:50px;background:white;}
 .btn_large { width:120px;height:50px;margin:2px;}
 
-/*Specific Defines*/
+/*Global Elements*/
 #Layer_TabStrip { height:100%; width:100%;}
-#Layer_MessageLog { background-color: #97A0A5;float:left;width:100%; height: 210px; position:absolute;bottom:0;}
-#MessageLogObj { width:99.3%;height:80%;}
+#Layer_MessageLog { padding:2px;background-color: #97A0A5;float:left;width:100%; height: 210px; position:absolute;bottom:0;}
+#MessageLogObj { height:174px;width:100%}
 
-#ButtonGridClear {margin:2px 0px; width:120px; height:30px;float:left; }
-#ButtonDebugLog  {margin:2px 0px; width:120px; height:30px;}
+#ButtonGridClear {margin:2 0 0 0; width:120px; height:30px;}
+#ButtonDebugLog  {margin:2 0 0 2; width:120px; height:30px;}
 
 /*From commands*/
 #Frame_Commands { height:100%;width:100%;  Background-color: #97A0A5;}
-#Frame_Endurance { height:100%;width:100%;  Background-color: #97A0A5;}
-#Frame_Debug { height:100%;width:100%;  Background-color: #97A0A5;}
-#Frame_CommandGeneral { clear:left;width:100%;}
-#FrameInfo  { width:100%; padding:5px;}
-#FrameAssignID       { clear:left;padding:5px;}
-#input_xacc { width : 60px;}
-#input_zacc { width : 60px;}
+  #FrameInfo  { width:100%;}
+    #FrameAssignID       { clear:left;padding:2px;}
+    #FrameFirmwareVersion       { }
+  #Frame_CommandGeneral { clear:left;width:100%;}
 #inputCANID
 {
   font-size     : 12px;
   font-weight   : bold;
-  color         : black;
-  height        : 21px;
-  width         : 50px;
+  width         : 75px;
   text-align    : center;
-  border-style  : solid;
-  border-width  : 1px;
-  margin-left   : 0px;
-  margin-right  : 10px;
+  margin-right  : 5px;
 }
 
 /*From Axis Control*/
@@ -94,19 +75,33 @@ table { border-collapse: collapse;    }
     #InnerFrame_Sensors { float:left;width:50%}
     #InnerFrame_IOButtons { width:50%;clear:left;float:right;}
 
+    
 /* From Endurance */
+.InnerFrame_Endurance
+{
+  border-style:solid;
+  border-color:white;
+  border-width:1px;
+  padding:5px;
+  margin:2px;
+  float:left;
+}
 
+#Frame_EnduranceTest {height:100%;width:100%;Background-color:#97A0A5;}
+  #Frame_Endurance {}
+    #InnerFrame_End_Settings{width:100%;}
+    #InnerFrame_End_Info{width:100%;}
+      #InnerFrame_timing{float:left;}
+      #InnerFrame_trayexchangetime{float:left;padding-left:135px}
 #test_runs {width : 100%;}
-#endurancerun {width :100%;padding:5px;}
-#btn_startendurance { width:150px; height:40px;}
-#btn_stopendurance { width:150px; height:40px;}
-#table_trayselect td{text-align:center;border-color:white;border-width:2px;border-style:outset;}
+#table_trayselect td{text-align:center;border-color:white;border-width:1px;border-style:outset;}
 
 /* From Debug */
 
+#Frame_Debug { height:100%;width:100%;  Background-color: #97A0A5;}
 #FrameSetEncoderPos {float:left;width:99.5%;}
 #Frame_miscfunctions { padding:5px;width: 100%;}
-#subframe_encodervalue {float:left;}
-#subframe_encoderpos {margin:0px 0px 0px 20px;float:right;}
+#InnerFrame_encodervalue {float:left;}
+#InnerFrame_encoderpos {margin:0px 0px 0px 20px;float:right;}
 
  
