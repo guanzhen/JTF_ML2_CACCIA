@@ -223,39 +223,6 @@ End Function
 Function FormatTimeString( Var_Time )
   FormatTimeString = String.Format("%02d:%02d:%02d", Hour(Var_Time), Minute(Var_Time), Second(Var_Time))
 End Function
-'------------------------------------------------------------------
-'Function to obtain a list with currently checked trays
-Function GetTrayListOld (test)
-  Dim lvl_counter
-  Dim string_chkbox_sel
-  Dim Tray_Array
-  Set Tray_Array = CreateObject( "MATH.Array" )
-
-
-  'determine which trays are selected. Trays 1 - 18
-  For lvl_counter = 1 to 18
-    string_chkbox_sel = "chk_lvl" & String.Format("%02d",lvl_counter)
-    'DebugMessage string_chkbox_sel
-    If Visual.Select(string_chkbox_sel).Checked Then
-      Tray_Array.Add(lvl_counter)
-      DebugMessage "Level "&lvl_counter &" is checked"
-      'there is at least one selected tray
-    End If
-  Next
-  
-  'if there are no checked boxes, then set as invalid
-  If Tray_Array.Size = 0 Then
-    GetTrayList = False
-    DebugMessage "No Trays Selected for Endurance Run"
-  Else
-    DebugMessage "Total Trays Selected: "&Tray_Array.Size
-    GetTrayList = True
-  End If
-  
-  Memory.Set "Tray_Array",Tray_Array
-
-End Function
-
 
 '------------------------------------------------------------------
 
@@ -284,7 +251,6 @@ Function GetTrayList ( )
   Dim stringtemp
   Dim Total_Level
   Dim TraySelectedMsg
- 
  
   TraySelectedMsg = "Trays selected: " 
   'Bottom Cassette

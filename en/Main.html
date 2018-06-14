@@ -99,6 +99,8 @@
           <td><select class="select_command" id = "optMoveLevel"></select></td>
           <td><button tooltip = "Moves to cassette level" id = "btnMoveLevel" class ="btn_large">Move to Level</button></td>
           <td><button tooltip = "Moves to Transport Position" id = "btnMoveTransport" class ="btn_large">Transport Pos</button></td>          
+          <td><button tooltip = "Moves to Top Cassette Position" id = "btnMoveTopCass" class ="btn_large">Top Cassette</button></td>          
+          <td><button tooltip = "Moves to Bottom Cassette Position" id = "btnMoveBtmCass" class ="btn_large">Btm Cassette</button></td>          
         </tr>
         <tr>
           <td rowspan="2"></td>
@@ -261,8 +263,9 @@
             <tr><td><img id="GapLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Gap Sensor</b></img></td></tr>
             <tr><td><img id="RwSdLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Reverse SlowDown Sensor</b></img></td></tr>
             <tr><td><img id="FwSdLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Foward SlowDown Sensor</b></img><td></tr>
-          </table>          
-          <button id="btnReadIO" class="btn_large">Start IO Polling</button>
+            <tr><td><input id="inout_pollingdelay" style = "text-align:right; width:40px"> ms polling interval</input></td></tr>
+          </table>
+          <button id="btnReadIO" class="btn_large">Start IO Polling</button>        
         </div>
         
         <div id= "InnerFrame_IOButtons">
@@ -380,9 +383,9 @@
           </div>
           <div style = "width:250px;padding:15 10">
             <table>
-              <tr><td>X-Acc<td><input id="input_end_xacc"></input></td></tr>      
-              <tr><td>Z-Acc<td><input id="input_end_zacc"></input></td></tr>
-              <tr><td colspan = "2"><input id="chk_endurance_random" type = "checkbox">Randomise Trays</input></td></tr>
+              <tr><td>X-Acc<td><input id="input_end_xacc" style="width:60px"></input></td></tr>      
+              <tr><td>Z-Acc<td><input id="input_end_zacc" style="width:60px"></input></td></tr>
+              <tr><td colspan = "2"><input id="chk_endurance_random" type = "checkbox">Random Sequence</input></td></tr>
             </table>
           </div>
         </div>
@@ -404,7 +407,7 @@
           <div id="InnerFrame_trayexchangetime">
             <h1>Cycle Time</h1>
             <table>
-            <tr><td>Current</td><td><input class="input_read" id="textTEx_current"></input></td></tr>
+            <tr><td width="100px">Current</td><td><input class="InputasDisplay" id="textTEx_current"></input></td></tr>
             </table>
           </div>
         </div>
@@ -418,7 +421,7 @@
         <table>
         <tr><td>LED Error Status</td>
         <td><button id="debug_getLED">Get</button></td>
-        <td><input id = "debug_LEDstatus"></input></td>
+        <td><input id = "debug_LEDstatus" class ="InputasDisplay"></input></td>
         </tr>
         <tr>
         <td>Reset Runtime Flash</td>

@@ -59,6 +59,18 @@ Function OnClick_btnSetDoorPos( Reason )
 End Function
 '------------------------------------------------------------------
 
+Function OnClick_btnMoveBtmCass ( Reason )
+Command_Debug_MoveLevel 5, "Bottom Cassette Position"
+
+End Function
+'------------------------------------------------------------------
+
+Function OnClick_btnMoveTopCass ( Reason )
+Command_Debug_MoveLevel 6, "Top Cassette Position"
+
+End Function
+'------------------------------------------------------------------
+
 Function OnClick_btnMovetoMidIndexPos ( Reason )
 Command_Debug_MoveLevel 2, "Mid Index Position"
 

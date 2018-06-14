@@ -193,11 +193,10 @@ End Function
 '------------------------------------------------------------------
 Function Command_Debug_AxisBrake ( Axis,OnOff )
 
-  Memory.CANData(0) = $(JTF_DBG_BRAKE)    
-  Memory.CANData(1) = Axis    
+  Memory.CANData(0) = $(JTF_DBG_BRAKE)
   Memory.CANData(2) = OnOff          
 
-  If CANSendTACMD($(CMD_SEND_DATA),$(MC_TEST_PRODUCTION),SLOT_NO,1,3) = True Then
+  If CANSendTACMD($(CMD_SEND_DATA),$(MC_TEST_PRODUCTION),SLOT_NO,1,2) = True Then
     If OnOff = 1 Then
       LogAdd "Brake Engaged Command Sent"
     Else

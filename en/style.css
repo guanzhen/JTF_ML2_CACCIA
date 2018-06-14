@@ -67,7 +67,7 @@ table { border-collapse: collapse;    }
 #Frame_AxisControl {height:100%;width:100%;Background-color: #97A0A5;}
   #FrameAxisInfomation      {float:left;width:56%;height:220px}
   #FrameAxisElevOffsetCtrl  {float:left;width:56%;clear:left;}
-  #FrameAxisMiscControl     {float:left;width:43%;height:421px}
+  #FrameAxisMiscControl     {float:left;width:43%;height:410px}
 /* From IO */
 .select_iocontrol {width:120px;margin:2px;height:40px;}
 #Frame_IOs { height:100%;width:100%;  Background-color: #97A0A5;}

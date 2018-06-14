@@ -25,14 +25,13 @@ function load_tabbar()
   //tabbar.enableAutoSize ( true );
   //tabbar.setHrefMode ( iframes );
   
-  
   for ( var i = 1; i <= tabbar.getNumberOfTabs(); i++ )
   {
     tabbar.setCustomStyle( 'main_tab' + i, 'gray', 'black', 'font-size:10pt;font-family:Arial;font-weight: bold;' );
   }
 
   //tabbar.hideTab("main_tab5");
-  tabbar.setTabActive("main_tab5");
+  tabbar.setTabActive("main_tab1");
 };
 
 function load_messagebox()
@@ -73,7 +72,7 @@ formStructure = [
     ]}
 ];
 dhxWins = new dhtmlXWindows();
-win = dhxWins.createWindow("cansetup", 100, 100, 500 , 200);
+win = dhxWins.createWindow("cansetup", 100, 100, 400, 200);
 win.setText("CAN Setup");
 win.attachURL("CanSetup.html");
 win.center();
@@ -88,7 +87,7 @@ dhtmlxEvent(window,"load",function()
   load_messagebox();
   load_tabbar();
   load_CANsetup();
-  //Layer_TabStrip.style.display = "none";
+  Layer_TabStrip.style.display = "none";
   Layer_MessageLog.style.display = "none";
   //Frame_Commands.style.display = "none";
   //Frame_AxisControl.style.display = "none";

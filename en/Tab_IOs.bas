@@ -66,7 +66,7 @@ Const REF_CLPR = &h05
 '------------------------------------------------------------------
 'Window Init
 '------------------------------------------------------------------
-Sub Init_Window_IO
+Sub Init_Window_IO()
   Dim SignalArray
   Dim i
   Set SignalArray = CreateObject( "MATH.Array" )
@@ -125,8 +125,11 @@ Sub Init_Window_IO
   Visual.Select("input_clprstandbycurrPos").Value = Memory.SignalArray.Data(MotorEncoderPosClprStandby)
   Visual.Select("input_clprclampcurrPos").Value = Memory.SignalArray.Data(MotorEncoderPosClprClamping)
   
+  Visual.Select("inout_pollingdelay").Value = "200"
+  
   'hide the hidden frame
   Visual.Select("IOframe_hidden").style.display = "none"
+  Visual.Select("inout_pollingdelay").SetValidation VALIDATE_INPUT_MASK_UI2,"OrangeRed",10
 	StartIOThread 1
 End Sub
 
@@ -134,16 +137,18 @@ End Sub
 'Button Click Functions
 '------------------------------------------------------------------
 Function OnClick_btnReadIO ( Reason )
+  Dim PollingDelay
+  PollingDelay = String.SafeParse(Visual.Select("inout_pollingdelay").Value,200)
   
-		If Not Memory.Exists("signal_IOPollStop") Then
-      Visual.Select("btnReadIO").value = "Stop IO Polling"
-      LogAdd "IO Polling Started"
-		  StartIOPolling 1
-    Else
-      Visual.Select("btnReadIO").value = "Start IO Polling"
-      LogAdd "IO Polling Stopped"
-		  StartIOPolling 0
-		End if   
+  If Not Memory.Exists("signal_IOPollStop") Then
+    Visual.Select("btnReadIO").value = "Stop IO Polling"
+    LogAdd "IO Polling Started"
+    StartIOPolling 1,PollingDelay
+  Else
+    Visual.Select("btnReadIO").value = "Start IO Polling"
+    LogAdd "IO Polling Stopped"
+    StartIOPolling 0,PollingDelay
+  End if   
   
 End Function
 
@@ -176,19 +181,19 @@ Function ReadIO( )
         'DebugMessage "BitCnt: " & bitCount & " Byte | Bit | Memory.CANData.Data: " & iByte & " " &iBit & " " & Lang.Bit(CANData.Data(iByte),iBit)
         
         Select Case bitCount
-        Case SensorDoorSwitch : Memory.SignalArray.Data(SensorDoorSwitch) = Invert_IO(Lang.Bit(CANData.Data(iByte),iBit))
+        Case SensorDoorSwitch : Memory.SignalArray.Data(SensorDoorSwitch) = Lang.Bit(CANData.Data(iByte),iBit)
         Case SensorDoorLock   : Memory.SignalArray.Data(SensorDoorLock)   = Lang.Bit(CANData.Data(iByte),iBit)
         Case SensorLiftHome   : Memory.SignalArray.Data(SensorLiftHome)   = Lang.Bit(CANData.Data(iByte),iBit)
         Case SensorTrayHome   : Memory.SignalArray.Data(SensorTrayHome)   = Lang.Bit(CANData.Data(iByte),iBit)
         Case SensorGapSensor  : Memory.SignalArray.Data(SensorGapSensor)  = Lang.Bit(CANData.Data(iByte),iBit)
-        Case SafetyLoop       : Memory.SignalArray.Data(SafetyLoop)       = Invert_IO(Lang.Bit(CANData.Data(iByte),iBit))
+        Case SafetyLoop       : Memory.SignalArray.Data(SafetyLoop)       = Lang.Bit(CANData.Data(iByte),iBit)
         Case SensorKickerHome : Memory.SignalArray.Data(SensorKickerHome) = Lang.Bit(CANData.Data(iByte),iBit)
         Case SensorFwSlowDown : Memory.SignalArray.Data(SensorFwSlowDown) = Lang.Bit(CANData.Data(iByte),iBit)
         Case SensorRvSlowDown : Memory.SignalArray.Data(SensorRvSlowDown) = Lang.Bit(CANData.Data(iByte),iBit)
         Case SensorPusherHome : Memory.SignalArray.Data(SensorPusherHome) = Lang.Bit(CANData.Data(iByte),iBit)
         Case SensorClamperHome: Memory.SignalArray.Data(SensorClamperHome)= Lang.Bit(CANData.Data(iByte),iBit)
-        Case LiftBrake        : Memory.SignalArray.Data(LiftBrake)        = Invert_IO(Lang.Bit(CANData.Data(iByte),iBit))
-        Case MotorPwrOff      : Memory.SignalArray.Data(MotorPwrOff)      = Invert_IO(Lang.Bit(CANData.Data(iByte),iBit))
+        Case LiftBrake        : Memory.SignalArray.Data(LiftBrake)        = Lang.Bit(CANData.Data(iByte),iBit)
+        Case MotorPwrOff      : Memory.SignalArray.Data(MotorPwrOff)      = Lang.Bit(CANData.Data(iByte),iBit)
         Case StopAtEnd        : Memory.SignalArray.Data(StopAtEnd)        = Lang.Bit(CANData.Data(iByte),iBit)
         Case Else :
         End Select
@@ -236,13 +241,13 @@ End Sub
 
 '------------------------------------------------------------------
 
-Function StartIOPolling(Par1)
+Function StartIOPolling(Par1,PollingDelay)
   
 	If Par1 = 1 Then
 
 		If Not Memory.Exists("signal_IOPollStop") Then
-		  System.Start "Background_PollIO",1
-		End if   
+		  System.Start "Background_PollIO",1,PollingDelay
+		End if
     
 	Else
   
@@ -251,7 +256,7 @@ Function StartIOPolling(Par1)
 		End if
     
 		Do While Memory.Exists("signal_IOPollStop") = 1      
-			System.Delay(100)      
+			System.Delay(PollingDelay)
 		Loop
     
 	End If
@@ -259,7 +264,7 @@ End Function
 
 '------------------------------------------------------------------
 
-Function Background_PollIO(Par1)
+Function Background_PollIO(Par1,PollingDelay)
   Dim signal_IOPollStop
   Dim LoopContinue
   
@@ -277,7 +282,7 @@ Function Background_PollIO(Par1)
       LoopContinue = 0
     End If
     
-    System.Delay(150)    
+    System.Delay(PollingDelay)    
   Loop
     
 	Memory.Free "signal_IOPollStop"
