@@ -30,12 +30,10 @@ End Function
 ' Button Click Functions
 '------------------------------------------------------------------
 
-
 Function OnClick_btnRefRun ( Reason )
   LogAdd "Reference run in progress... Please wait!"
   Command_Prepare_RefRun
   'Update reference status
-  
   'System.Delay(200)
   'GetRefRun REF_ALL
   'GetRefRun REF_ELVT
@@ -79,10 +77,6 @@ Function OnClick_btnMoveLevel( Reason )
  
   Command_Debug_MoveLevel Visual.Select("optMoveLevel").SelectedItemAttribute("Value"),Visual.Select("optMoveLevel").SelectedItemName
 
-End Function
-'------------------------------------------------------------------
-Function OnClick_btnMoveTransport ( Reason )
-  Command_Debug_MoveLevel TRANSPORTLEVEL 
 End Function
 
 '------------------------------------------------------------------

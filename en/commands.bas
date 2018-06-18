@@ -54,7 +54,8 @@ End Function
 ' Prepare Commands
 '------------------------------------------------------------------
 Function Command_Prepare_RefRun
-  If CANSendPrepareCMD($(CMD_PREPARE_REF_RUN),1,SLOT_NO,1,0,50000) = True Then
+  Memory.CANData(0) = 0
+  If CANSendPrepareCMD($(CMD_PREPARE_REF_RUN),1,SLOT_NO,1,1,50000) = True Then
     LogAdd "Reference Run command started"
   Else
     LogAdd "Reference Run Error!"
@@ -133,12 +134,12 @@ End Function
 '------------------------------------------------------------------
 
 Function Command_PrepareTransport ( )
-    If CANSendPrepareCMD($(CMD_PREPARE_TRANSPORT),1,SLOT_NO,1,0,10000) = True Then
-      Command_PrepareTransport = True
-    Else
-      LogAdd "Prepare Transport Error!"  
-      Command_PrepareTransport = False
-    End If
+  Memory.CANData(0) = 1
+  If CANSendPrepareCMD($(CMD_PREPARE_REF_RUN),1,SLOT_NO,1,1,50000) = True Then
+    LogAdd "Reference Run command started"
+  Else
+    LogAdd "Reference Run Error!"
+  End If
 End Function 
 
 '------------------------------------------------------------------
@@ -194,7 +195,7 @@ End Function
 Function Command_Debug_AxisBrake ( Axis,OnOff )
 
   Memory.CANData(0) = $(JTF_DBG_BRAKE)
-  Memory.CANData(2) = OnOff          
+  Memory.CANData(1) = OnOff          
 
   If CANSendTACMD($(CMD_SEND_DATA),$(MC_TEST_PRODUCTION),SLOT_NO,1,2) = True Then
     If OnOff = 1 Then
