@@ -60,19 +60,43 @@ End Function
 '------------------------------------------------------------------
 
 Function OnClick_btnRefillStart ( Reason )
-  Dim Cassettte
-  Cassettte = String.SafeParse(Visual.Select("optRefillCassette").SelectedItemAttribute("Value"),"0x01")
-  LogAdd "Refill Cassette : " & Cassettte
-  Command_Prepare_RefillStart Cassettte, &hFF
+  Dim Cassette
+  Cassette = String.SafeParse(Visual.Select("optRefillCassette").SelectedItemAttribute("Value"),"0x01")
+  LogAdd "Refill Cassette : " & Cassette
+  Command_Prepare_RefillStart Cassette, &hFF
+  GetCassetteInfo  
+ End Function
+ 
+'------------------------------------------------------------------
+
+ Function OnClick_btnRefillTop( Reason )
+  Dim Cassette
+  Cassette = 2
+  LogAdd "Refill Cassette : Top"
+  Command_Prepare_RefillStart Cassette, &hFF
+  GetCassetteInfo  
+ End Function
+ 
+ '------------------------------------------------------------------
+ 
+ Function OnClick_btnRefillBottom( Reason )
+  Dim Cassette
+  Cassette = 1
+  LogAdd "Refill Cassette : Bottom"
+  Command_Prepare_RefillStart Cassette, &hFF
+  GetCassetteInfo  
  End Function
  
 '------------------------------------------------------------------
 
 Function OnClick_btnRefillStop ( Reason )
   Command_Prepare_QuitRefillPos
+  System.Delay(1000)
+  GetCassetteInfo
 End Function
 
 '------------------------------------------------------------------
+
 Function OnClick_btnMoveLevel( Reason )
  
   Command_Debug_MoveLevel Visual.Select("optMoveLevel").SelectedItemAttribute("Value"),Visual.Select("optMoveLevel").SelectedItemName
@@ -119,8 +143,6 @@ Function OnClick_btnGetApp ( Reason )
   
   ValidateFeederID FeederID
 End Function
-
-
 
 '------------------------------------------------------------------
 
@@ -243,8 +265,8 @@ End Function
 Function GetCassetteInfo ( )
   If Command_GetCassette = True Then
     GetCassetteInfo = True
-    CassetteInfoDisplay Memory.CANData.Data(3),"inputCasInfoTop"
-    CassetteInfoDisplay Memory.CANData.Data(2),"inputCasInfoBottom"
+    CassetteInfoDisplay Memory.CANData.Data(3),"inputCasInfoTop","sel_cassette_top"
+    CassetteInfoDisplay Memory.CANData.Data(2),"inputCasInfoBottom","sel_cassette_bottom"
   Else
     GetCassetteInfo = False
     DebugMessage "Read Cassette Info Failed"
@@ -253,13 +275,21 @@ End Function
 
 '------------------------------------------------------------------
 
-Sub CassetteInfoDisplay( CasType , CasDisplay )
+Sub CassetteInfoDisplay( CasType, CasDisplay, CasSelect )
   If Visual.Exists(CasDisplay) Then
     Select Case CasType
-    Case &h00 : Visual.Select(CasDisplay).Value = "None"
-    Case &hFF : Visual.Select(CasDisplay).Value = "RFID Err"
-    Case &h07 : Visual.Select(CasDisplay).Value = "7 Level"
-    Case &h09 : Visual.Select(CasDisplay).Value = "9 Level"
+    Case &h00 : 
+      Visual.Select(CasDisplay).Value = "None"
+      Visual.Select(CasSelect).SelectedIndex = "2"
+    Case &hFF : 
+      Visual.Select(CasDisplay).Value = "RFID Err"    
+      Visual.Select(CasSelect).SelectedIndex = "2"
+    Case &h07 : 
+      Visual.Select(CasDisplay).Value = "7 Level"
+      Visual.Select(CasSelect).SelectedIndex = "1"
+    Case &h09 : 
+      Visual.Select(CasDisplay).Value = "9 Level"
+      Visual.Select(CasSelect).SelectedIndex = "0"
     Case Else Visual.Select(CasDisplay).Value = "-"
     End Select
   End If
