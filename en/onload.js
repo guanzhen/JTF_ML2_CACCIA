@@ -30,7 +30,7 @@ function load_tabbar()
     tabbar.setCustomStyle( 'main_tab' + i, 'gray', 'black', 'font-size:10pt;font-family:Arial;font-weight: bold;' );
   }
 
-  //tabbar.hideTab("main_tab5");
+  tabbar.hideTab("main_tab5");
   tabbar.setTabActive("main_tab1");
 };
 
