@@ -193,7 +193,7 @@ Function ReadIO( )
         Case SensorPusherHome : Memory.SignalArray.Data(SensorPusherHome) = Lang.Bit(CANData.Data(iByte),iBit)
         Case SensorClamperHome: Memory.SignalArray.Data(SensorClamperHome)= Lang.Bit(CANData.Data(iByte),iBit)
         Case LiftBrake        : Memory.SignalArray.Data(LiftBrake)        = Lang.Bit(CANData.Data(iByte),iBit)
-        Case MotorPwrOff      : Memory.SignalArray.Data(MotorPwrOff)      = Lang.Bit(CANData.Data(iByte),iBit)
+        Case MotorPwrOff      : Memory.SignalArray.Data(MotorPwrOff)      = Invert_IO(Lang.Bit(CANData.Data(iByte),iBit))
         Case StopAtEnd        : Memory.SignalArray.Data(StopAtEnd)        = Lang.Bit(CANData.Data(iByte),iBit)
         Case Else :
         End Select
