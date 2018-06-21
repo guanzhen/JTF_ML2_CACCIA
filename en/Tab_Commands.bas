@@ -82,11 +82,17 @@ End Function
 '------------------------------------------------------------------
 Function OnClick_btnReset ( Reason )
   Dim CanSendArg,CanReadArg,CANConfig
+  Dim Reply
   Dim encodersel
   Set CanSendArg = CreateObject("ICAN.CanSendArg")
   Set CanReadArg = CreateObject("ICAN.CanReadArg")
-
-  If Memory.Exists( "CanManager" ) Then
+  Reply = 1
+  
+  If Memory.CANConfig.Config = 1 Then
+    Reply = MsgBox("This will reset the FCU! Do you wish to continue?", 1 , "Confirm Reset")
+  End If
+  
+  If Reply = 1 AND Memory.Exists( "CanManager" ) Then
     Memory.Get "CANConfig",CANConfig
     CanSendArg.CanId = CANConfig.CANIDcmd
     CanSendArg.Data(0) = &h06
@@ -99,11 +105,19 @@ End Function
 '------------------------------------------------------------------
 
 Function OnClick_btnGetApp ( Reason )
-
-  GetFirmwareInfo
-  GetCassetteInfo
-  GetFeederID
+  Dim Result, FeederID
+  Result = GetFirmwareInfo
+  If Result = True Then
+    Result = GetCassetteInfo
+  End If
   
+  If Result = True Then
+    GetFeederID(FeederID)
+  Else
+    FeederID = "????????????"
+  End If  
+  
+  ValidateFeederID FeederID
 End Function
 
 
@@ -119,9 +133,10 @@ Function OnClick_btnAssignCANID( Reason )
   LogAdd "Assign CANID"
   CANID_Assign CanID
   System.Delay(100)
-  Command_GetNumOfSlots
-  GetFirmwareInfo
-  GetCassetteInfo
+  If Command_GetNumOfSlots = True Then
+    GetFirmwareInfo
+    GetCassetteInfo
+  End If
 End Function
 '------------------------------------------------------------------
 
@@ -165,7 +180,7 @@ End Function
 '------------------------------------------------------------------
 Function OnClick_btnMoveTransport ( Reason )
   LogAdd "Move to Transport Position"
-  Command_PrepareTransport
+  Command_Prepare_Transport
 End Function 
 
 '------------------------------------------------------------------
@@ -192,32 +207,46 @@ End Function
 '------------------------------------------------------------------
 ' Supporting Functions
 '------------------------------------------------------------------
-Sub GetFirmwareInfo ( )
-  Dim AppMaj,AppMin
+Function GetFirmwareInfo ( )
+  Dim AppMaj,AppMin,Timeout
+  Timeout = 0
   If Command_GetFW($(PARAM_DL_ZIEL_APPL),AppMaj,AppMin) = 1 Then
     Visual.Select("textAppVersion").Value = String.Format("%02X.%02X", AppMaj,AppMin)
   Else
-    Visual.Select("textAppVersion").Value = "-- --"
+    Timeout = 1
+    Visual.Select("textAppVersion").Value = "??.??"
   End If
-        
-  If AppMin < eSWVersionMin OR AppMaj < eSWVersionMaj Then
-    LogAdd ("Warning: eSW version is lower than V" & String.Format("%02X.%02X", eSWVersionMaj,eSWVersionMin) & " Not all functions will work properly with CACCIA module!")
+  
+  If Timeout = 0 Then
+    If AppMin < eSWVersionMin OR AppMaj < eSWVersionMaj Then
+      LogAdd ("Warning: eSW version is lower than V" & String.Format("%02X.%02X", eSWVersionMaj,eSWVersionMin) & " Not all functions will work properly with CACCIA module!")
+    Else
+      LogAdd ("Read Firmware")
+    End If
+    If Command_GetFW($(PARAM_DL_ZIEL_BIOS),AppMaj,AppMin) = 1 Then
+      Visual.Select("textBiosVersion").Value = String.Format("%02X.%02X", AppMaj,AppMin)
+    Else
+      Visual.Select("textBiosVersion").Value = "??.??"
+    End If
   Else
-    LogAdd ("Read Firmware")
-  End If
-  If Command_GetFW($(PARAM_DL_ZIEL_BIOS),AppMaj,AppMin) = 1 Then
-    Visual.Select("textBiosVersion").Value = String.Format("%02X.%02X", AppMaj,AppMin)
+    Visual.Select("textBiosVersion").Value = "??.??"
+  End If 
+
+  If Timeout = 1 Then
+    GetFirmwareInfo = False
   Else
-    Visual.Select("textBiosVersion").Value = "-- --"
+    GetFirmwareInfo = True  
   End If
-End Sub
+End Function
 '------------------------------------------------------------------
 
 Function GetCassetteInfo ( )
   If Command_GetCassette = True Then
+    GetCassetteInfo = True
     CassetteInfoDisplay Memory.CANData.Data(3),"inputCasInfoTop"
     CassetteInfoDisplay Memory.CANData.Data(2),"inputCasInfoBottom"
   Else
+    GetCassetteInfo = False
     DebugMessage "Read Cassette Info Failed"
   End If  
 End Function
@@ -236,6 +265,19 @@ Sub CassetteInfoDisplay( CasType , CasDisplay )
   End If
 End Sub
 
+'------------------------------------------------------------------
+
+Function ValidateFeederID( FeederID )
+  Visual.Select("inputFeederID").Value = FeederID  
+  Visual.Select("inputFeederID").style.backgroundColor = "white"
+  If Len(FeederID) < 12 or FeederID = "????????????" Then
+    Visual.Select("inputFeederID").style.backgroundColor = "red"
+  Elseif Visual.Select("inputFeederID").Value = "79ASMDH09999" Then
+    Visual.Select("inputFeederID").style.backgroundColor = "red"
+    LogAdd "No FeederID programmed!"
+    MsgBox "No FeederID programmed!"
+  End If  
+End Function
 '------------------------------------------------------------------
 
 Function ValidateAcc ( Value  )

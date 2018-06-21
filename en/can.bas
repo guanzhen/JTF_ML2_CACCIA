@@ -32,6 +32,7 @@ If CANConfig.Config = 0 Then
     Visual.Select("inputCANID").Value = "500"
     ConnectType = "[XFCU]"
     Visual.Select("btnAssignCANID").Style.Display  = "none"
+    Visual.Select("btnclrusrerr").Style.Display  = "none"
   End If
   
   DebugMessage "Selected Config :"&CANConfig.Config
@@ -359,6 +360,7 @@ Function GetErrorInfo ( CanReadArg )
   Case $(ACK_NOT_IMPLEMENTED): ErrorMsg = "Not Implemented"
   Case $(ACK_WRONG_STATE): ErrorMsg = "Wrong State"
   Case $(ACK_TIMEOUT_SUBSYSTEM): ErrorMsg = "Timeout Subsystem"
+  Case $(ACK_TOO_MANY_PREPARES): ErrorMsg = "Too Many Prepares"
   'Case $(ACK_WRONG_LENGTH): ErrorMsg = "Wrong Length"   
   Case $(PB_ERROR_JTF3_DOOR_OPEN): ErrorMsg = "Door Open"
   Case $(PB_ERROR_JTF3_TRAY_IN_STACK): ErrorMsg = "Tray in Stack"
@@ -524,13 +526,18 @@ Function CANSendGetMC(Cmd,SubCmd,SlotNo,Division,DataLen)
          Next
       End If
       Memory.Set "CANData",CANData
-      'DebugMessage "CANData:" & String.Format("%02X %02X %02X %02X %02X %02X %02X %02X",CanReadArg.Data(0),CanReadArg.Data(1) ,CanReadArg.Data(2) ,CanReadArg.Data(3) ,CanReadArg.Data(4) ,CanReadArg.Data(5) ,CanReadArg.Data(6) ,CanReadArg.Data(7))
+      DebugMessage "CANData:" & String.Format("%02X %02X %02X %02X %02X %02X %02X %02X",CanReadArg.Data(0),CanReadArg.Data(1) ,CanReadArg.Data(2) ,CanReadArg.Data(3) ,CanReadArg.Data(4) ,CanReadArg.Data(5) ,CanReadArg.Data(6) ,CanReadArg.Data(7))
     Else
-      If Not CanReadArg.Data(1) = $(ACK_NO_MORE_DATA) AND SubCmd = $(MC_FEEDER_IDENT) Then
-        LogAdd "Command NOK: " & GetErrorInfo( CanReadArg ) & " (" & CanReadArg.Format & ")"      
-        CANSendGetMC = False
+      If Not Result = SCA_TIMEOUT And Not Result = SCA_SEND Then
+        If Not CanReadArg.Data(1) = $(ACK_NO_MORE_DATA) AND SubCmd = $(MC_FEEDER_IDENT) Then
+          LogAdd "Command NOK: " & GetErrorInfo( CanReadArg ) & " (" & CanReadArg.Format & ")"      
+          CANSendGetMC = False
+        Else
+          CANSendGetMC = True
+        End If        
       Else
-        CANSendGetMC = True
+        CANSendGetMC = False
+        LogAdd "Command NOK: Timeout" 
       End If
     End If
     CanManager.Deliver = True
@@ -767,7 +774,7 @@ Function CANSendTACMD(Cmd,SubCmd,SlotNo,Division,DataLen)
         .Data(2) = SlotNo
       For i = 0 to DataLen - 1
         .Data(3+i) = CANData.Data(i)
-        DebugMessage "Copy Data " & i
+        'DebugMessage "Copy Data " & i
       Next
       .Length = 3 + DataLen      
     End With
@@ -781,7 +788,7 @@ Function CANSendTACMD(Cmd,SubCmd,SlotNo,Division,DataLen)
         If DataLen > 0 Then
           For i = 0 to DataLen - 1
             .Data(2+i) = CANData.Data(i)
-            DebugMessage "Copy Data " & i
+            'DebugMessage "Copy Data " & i
           Next  
         End If
         .Length = 2 + DataLen
@@ -830,20 +837,7 @@ Function CANSendTACMD(Cmd,SubCmd,SlotNo,Division,DataLen)
   
 End Function
 
-Function ValidateFeederID( FeederID )
-  Visual.Select("inputFeederID").Value = FeederID  
-  Visual.Select("inputFeederID").style.backgroundColor = "white"
-  If Len(FeederID) < 12 Then
-    Visual.Select("inputFeederID").style.backgroundColor = "red"
-  Elseif Visual.Select("inputFeederID").Value = "79ASMDH09999" Then
-    Visual.Select("inputFeederID").style.backgroundColor = "red"
-    LogAdd "No FeederID programmed!"
-    MsgBox "No FeederID programmed!"
-  End If
-  
-End Function
-
-Function GetFeederID ()
+Function GetFeederID (ByRef InFeederID)
   Dim CANData,i
   Dim FeederID
   Memory.Get "CANData",CANData
@@ -876,17 +870,10 @@ Function GetFeederID ()
       FeederID = FeederID & chr(CANData.Data(i))
     Next
     'send end
+    GetFeederID = True
   Else
+    GetFeederID = False
     FeederID = "????????????"
   End If
-  ValidateFeederID FeederID
-  GetFeederID = FeederID
-End Function
-
-Function OnClick_ButtonDebug ( Reason )
-  Dim FeederID
-  Dim FeederID2
-  FeederID = GetFeederID()
-  'FeederID2 = String.ComposeString(FeederID,,10)
-  LogAdd FeederID
+  InFeederID = FeederID
 End Function

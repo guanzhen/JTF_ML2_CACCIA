@@ -56,7 +56,7 @@ Option Explicit
 Const APP_WIDTH = 1024
 Const APP_HEIGHT = 660
 'Supported eSW version for this module
-Const eSWVersionMin = &h28
+Const eSWVersionMin = &h29
 Const eSWVersionMAj = &h00
 Const MAX_LOG_ROWS = 100
 '------------------------------------------------------------------

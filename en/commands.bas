@@ -133,12 +133,11 @@ End Function
 
 '------------------------------------------------------------------
 
-Function Command_PrepareTransport ( )
-  Memory.CANData(0) = 1
-  If CANSendPrepareCMD($(CMD_PREPARE_REF_RUN),1,SLOT_NO,1,1,50000) = True Then
-    LogAdd "Reference Run command started"
+Function Command_Prepare_Transport ( )
+  If CANSendPrepareCMD($(CMD_PREPARE_TRANSPORT),1,SLOT_NO,1,0,50000) = True Then
+    LogAdd "Transport command started"
   Else
-    LogAdd "Reference Run Error!"
+    LogAdd "Transport command Error."
   End If
 End Function 
 
@@ -147,8 +146,10 @@ End Function
 '------------------------------------------------------------------
 Function Command_GetNumOfSlots( )
   If CANSendGetMC($(CMD_GET_DATA),$(MC_NUMBER_OF_SLOTS),SLOT_NO,1,0) = True Then
+    Command_GetNumOfSlots = True
     LogAdd "Get Number of Slot command sent"
   Else
+    Command_GetNumOfSlots = False
     LogAdd "Get Number of Slot command Error!"
   End If
 End Function

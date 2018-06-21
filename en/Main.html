@@ -46,7 +46,7 @@
           <td><button id = "btnAssignCANID" class = "btn_large">Assign CANID</button></td>
           <td><button id = "btnGetApp" class = "btn_large">Read Info</button></td>
           <td><button id = "btnReset" class = "btn_large">Reset</button></td>
-          <td><button id="btnclrusrerr" class = "btn_large">Clear Err</button></td>
+          <td><button id = "btnclrusrerr" class = "btn_large">Clear Err</button></td>
           </table>
         </div>
         
@@ -165,11 +165,11 @@
             -->
         <table>
           <tr>
-            <td><button class="btn_axis_control" id = "btnPositive"   style = "width=100px;">+</button>
+            <td><button class="btn_axis_control" id = "btnPositive"   style = "width=100px;"><b>Up</b></button>
             <td>Tray Index Position</td>
             <td><button class="btn_axis_control" id = "btnMovetoMidIndexPos">Move to Pos</button></td>
-            <td><button class="btn_axis_control" id = "btnSetMidIndexPos">Set New Pos</button></td>
-            <td><button class="btn_axis_control" id = "btnSetMidIndexPosDefault">Set Default</button></td>
+            <td><button class="btn_axis_control" id = "btnSetMidIndexPos">Save</button></td>
+            <td><button class="btn_axis_control" id = "btnSetMidIndexPosDefault">Reset</button></td>
           </tr>
           <tr>
             <td>
@@ -185,11 +185,11 @@
            <td colspan = "4"><hr /></td>
           </tr>
           <tr>
-            <td><button class="btn_axis_control" id = "btnNegative"   style = "width=100px;">-</button>      
+            <td><button class="btn_axis_control" id = "btnNegative"   style = "width=100px;"><b>Down</b></button>      
             <td>Door Position</td>
             <td><button class="btn_axis_control" id = "btnMovetoDoorPos">Move to Pos</button></td>
-            <td><button class="btn_axis_control" id = "btnSetDoorPos">Set New Pos</button></td>
-            <td><button class="btn_axis_control" id = "btnSetDoorPosDefault">Set Default</button></td>
+            <td><button class="btn_axis_control" id = "btnSetDoorPos">Save</button></td>
+            <td><button class="btn_axis_control" id = "btnSetDoorPosDefault">Reset</button></td>
           </tr>
         </table>
       </div>
@@ -263,7 +263,7 @@
             <tr><td><img id="GapLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Gap Sensor</b></img></td></tr>
             <tr><td><img id="RwSdLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Reverse SlowDown Sensor</b></img></td></tr>
             <tr><td><img id="FwSdLed" class="LedImgStyle"  src="./Img/led_green.gif">&nbsp;&nbsp;<b class="FontCommon" >Foward SlowDown Sensor</b></img><td></tr>
-            <tr><td><input id="inout_pollingdelay" style = "text-align:right; width:40px"> ms polling interval</input></td></tr>
+            <tr><td><input id="inout_pollingdelay" style = "text-align:right; width:35px;margin-left:10px"><b class="FontCommon"> ms polling interval</b></input></td></tr>
           </table>
           <button id="btnReadIO" class="btn_large">Start IO Polling</button>        
         </div>
@@ -395,9 +395,9 @@
             <h1>Information</h1>
             <table>
             <tr><td>Duration</td><td><input class="InputasDisplay" id="textDuration" ></input> mins</td></tr>
-            <tr><td>Start Time</td><td><input class="InputasDisplay" id="textERstarttime"></input></td></tr>
-            <tr><td>Elapsed Time</td><td><input class="InputasDisplay" id="textERelapsedtime"></input></td></tr>
-            <tr><td>Stop Time</td><td><input class="InputasDisplay" id="textERstoptime"></input></td></tr>
+            <tr><td>Start Time</td><td><input readonly class="InputasDisplay" id="textERstarttime"></input></td></tr>
+            <tr><td>Elapsed Time</td><td><input readonly class="InputasDisplay" id="textERelapsedtime"></input></td></tr>
+            <tr><td>Stop Time</td><td><input readonly class="InputasDisplay" id="textERstoptime"></input></td></tr>
             <tr>   
               <td><button id="btn_startendurance" class = "btn_large">Start </button></td>
               <td><button id="btn_stopendurance" class = "btn_large">Stop </button></td>
@@ -407,7 +407,7 @@
           <div id="InnerFrame_trayexchangetime">
             <h1>Cycle Time</h1>
             <table>
-            <tr><td width="100px">Current</td><td><input class="InputasDisplay" id="textTEx_current"></input></td></tr>
+            <tr><td width="100px">Current</td><td><input readonly class="InputasDisplay" id="textTEx_current"></input></td></tr>
             </table>
           </div>
         </div>

@@ -100,27 +100,45 @@ End Function
 
 '------------------------------------------------------------------
 Function OnClick_btnGetRefInfo ( Reason )
-  Dim CANData
+  Dim CANData, Result
   Memory.Get "CANData",CANData
   
   LogAdd "Get Reference and Tray Info"
-  GetRefRun REF_ALL
-  GetRefRun REF_ELVT
-  GetRefRun REF_PSHR
-  GetRefRun REF_CLPR
-  GetRefRun REF_KIKR
-  GetRefRun REF_CNVY
-  
-  Memory.CANData(0) = $(JTF_DBG_DOORPOS)
-  If CANSendTACMD($(CMD_GET_DATA),$(MC_TEST_PRODUCTION),SLOT_NO,1,1) = True Then
-    Visual.Select("refpos_door").Value = String.Format("0x%08X", Lang.MakeLong4(CANData.Data(2),CANData.Data(3),CANData.Data(4),CANData.Data(5)))
+  Result = GetRefRun(REF_ALL)
+  If Result = True Then
+  Result = GetRefRun(REF_ELVT)
+  End If
+  If Result = True Then  
+  Result = GetRefRun(REF_KIKR)
+  End If
+  If Result = True Then
+  Result = GetRefRun(REF_CNVY)
+  End If
+  If Result = True Then
+  Result = GetRefRun(REF_PSHR)
+  End If
+  If Result = True Then
+  Result = GetRefRun(REF_CLPR)
   End If
 
-  Memory.CANData(0) = $(JTF_DBG_LIFTPOS)
-  If CANSendTACMD($(CMD_GET_DATA),$(MC_TEST_PRODUCTION),SLOT_NO,1,1) = True Then
-    Visual.Select("refpos_lift").Value = String.Format("0x%08X", Lang.MakeLong4(CANData.Data(2),CANData.Data(3),CANData.Data(4),CANData.Data(5)))
+  If Result = True Then  
+    Memory.CANData(0) = $(JTF_DBG_LIFTPOS)
+    If CANSendTACMD($(CMD_GET_DATA),$(MC_TEST_PRODUCTION),SLOT_NO,1,1) = True Then
+      Result = True
+      Visual.Select("refpos_lift").Value = String.Format("0x%08X", Lang.MakeLong4(CANData.Data(2),CANData.Data(3),CANData.Data(4),CANData.Data(5)))
+    End If
   End If
   
+  If Result = True Then  
+    Memory.CANData(0) = $(JTF_DBG_DOORPOS)
+    If CANSendTACMD($(CMD_GET_DATA),$(MC_TEST_PRODUCTION),SLOT_NO,1,1) = True Then
+      Result = True
+      Visual.Select("refpos_door").Value = String.Format("0x%08X", Lang.MakeLong4(CANData.Data(2),CANData.Data(3),CANData.Data(4),CANData.Data(5)))
+    End If
+  End If
+  If Result = True Then  
+    Command_GetCnvyTrayInfo
+  End If
 End Function 
 '------------------------------------------------------------------
 Function OnClick_btnencoderset0 ( Reason )
@@ -233,13 +251,14 @@ Function GetRefRun ( Axis )
   Case REF_CNVY:  refrun_sel = OperationConveyorRefRun
   End Select
 
-  Command_GetData_GetRefRun(Axis)
-  If Memory.CANData(2) = 0 Then
-    Memory.SignalArray.Data(refrun_sel) =  "Need Reference"
-    GetRefRun = False
-  Else
-    Memory.SignalArray.Data(refrun_sel) =  "Referenced"
-    GetRefRun = True
+  If Command_GetData_GetRefRun(Axis) = 1 Then
+    If Memory.CANData(2) = 0 Then
+      Memory.SignalArray.Data(refrun_sel) =  "Need Reference"
+      GetRefRun = False
+    Else
+      Memory.SignalArray.Data(refrun_sel) =  "Referenced"
+      GetRefRun = True
+    End If
   End If
  End Function
 

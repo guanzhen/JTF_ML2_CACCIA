@@ -19,7 +19,14 @@ Function Init_Window_Test()
 '------------------------------------------------------------------
 Function OnClick_btn_startendurance ( Reason )
 
+  If Memory.Exists("signal_IOPollStop") Then
+    Visual.Select("btnReadIO").value = "Start IO Polling"
+    LogAdd "IO Polling Stopped"
+    StartIOPolling 0,100
+  End If
+  
   LogAdd "Endurance Run Start"
+  
   'Check if duration selected is valid.
   If String.SafeParse(Visual.Select("textDuration").Value) = 0 OR String.SafeParse(Visual.Select("textDuration").Value) > 0 Then
      'If no trays selected, then do not start.

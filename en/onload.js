@@ -13,6 +13,7 @@ function load_tabbar()
   tabbar.addTab("main_tab3","IOs");
   tabbar.addTab("main_tab4","Endurance Test");
   tabbar.addTab("main_tab5","Debug");
+  tabbar.hideTab("main_tab5");
   tabbar.setContent( "main_tab1", Frame_Commands);
   tabbar.setContent( "main_tab2", Frame_AxisControl);
   tabbar.setContent( "main_tab3", Frame_IOs);
@@ -20,17 +21,15 @@ function load_tabbar()
   tabbar.setContent( "main_tab5", Frame_Debug);
   
   tabbar.enableAutoReSize( true );
-  //tabbar.enableScroll( true );
+  tabbar.enableScroll( true );
   //tabbar.enableForceHiding ( true );
-  //tabbar.enableAutoSize ( true );
+  tabbar.enableAutoSize ( true );
   //tabbar.setHrefMode ( iframes );
   
   for ( var i = 1; i <= tabbar.getNumberOfTabs(); i++ )
   {
     tabbar.setCustomStyle( 'main_tab' + i, 'gray', 'black', 'font-size:10pt;font-family:Arial;font-weight: bold;' );
   }
-
-  tabbar.hideTab("main_tab5");
   tabbar.setTabActive("main_tab1");
 };
 
