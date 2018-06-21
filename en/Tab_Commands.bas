@@ -59,16 +59,6 @@ End Function
 
 '------------------------------------------------------------------
 
-Function OnClick_btnRefillStart ( Reason )
-  Dim Cassette
-  Cassette = String.SafeParse(Visual.Select("optRefillCassette").SelectedItemAttribute("Value"),"0x01")
-  LogAdd "Refill Cassette : " & Cassette
-  Command_Prepare_RefillStart Cassette, &hFF
-  GetCassetteInfo  
- End Function
- 
-'------------------------------------------------------------------
-
  Function OnClick_btnRefillTop( Reason )
   Dim Cassette
   Cassette = 2
