@@ -837,7 +837,7 @@ Function CANSendTACMD(Cmd,SubCmd,SlotNo,Division,DataLen)
   
 End Function
 
-Function GetFeederID (ByRef InFeederID)
+Function GetFeederID ()
   Dim CANData,i
   Dim FeederID
   Memory.Get "CANData",CANData
@@ -875,5 +875,6 @@ Function GetFeederID (ByRef InFeederID)
     GetFeederID = False
     FeederID = "????????????"
   End If
-  InFeederID = FeederID
+  'DebugMessage "GetFeederID " & FeederID
+  GetFeederID = FeederID
 End Function

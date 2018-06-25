@@ -53,8 +53,8 @@ End Function
 
 ' Prepare Commands
 '------------------------------------------------------------------
-Function Command_Prepare_RefRun
-  Memory.CANData(0) = 0
+Function Command_Prepare_RefRun()
+  Memory.CANData(0) = 1
   If CANSendPrepareCMD($(CMD_PREPARE_REF_RUN),1,SLOT_NO,1,1,50000) = True Then
     LogAdd "Reference Run command started"
   Else
@@ -134,7 +134,8 @@ End Function
 '------------------------------------------------------------------
 
 Function Command_Prepare_Transport ( )
-  If CANSendPrepareCMD($(CMD_PREPARE_TRANSPORT),1,SLOT_NO,1,0,50000) = True Then
+  Memory.CANData(0) = 2
+  If CANSendPrepareCMD($(CMD_PREPARE_REF_RUN),1,SLOT_NO,1,1,50000) = True Then
     LogAdd "Transport command started"
   Else
     LogAdd "Transport command Error."

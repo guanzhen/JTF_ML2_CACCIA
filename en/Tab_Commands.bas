@@ -126,7 +126,7 @@ Function OnClick_btnGetApp ( Reason )
   End If
   
   If Result = True Then
-    GetFeederID(FeederID)
+    FeederID = GetFeederID
   Else
     FeederID = "????????????"
   End If  
