@@ -641,7 +641,7 @@ End Function
 
 Function CANSendPrepareCMD(Cmd,Context,SlotNo,Division,DataLen,PubEndTimeout)
   Dim CanManager, CanConfig
-  Dim CanSendArg, CanReadArg,CANData
+  Dim CanSendArg, CanReadArg, CANData
   Dim i,Result
   Dim CANID
   Dim WaitPub,StartTime
